@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contact Us | SnapJoy Photo Booth & Event Rentals</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23D4AF37'%3E%3Cpath d='M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z'/%3E%3C/svg%3E">
+  <meta name="description" content="Contact SnapJoy for photo booth rentals. Get a custom quote, check availability, or ask a question. We respond within 24 hours.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base - Three Color System: Gallery White, Tuxedo Black, Champagne Gold */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F8F8;
+      --bg-card: #FFFFFF;
+      --bg-nav: #171717;
+      --text-primary: #171717;
+      --text-secondary: #2C2C2C;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #171717;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1A1A1A;
+      --bg-nav: #0A0A0A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #0A0A0A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Utility Classes */
+    .text-accent { color: var(--accent); }
+    .bg-accent { background: var(--accent); }
+    .btn-primary {
+      background: var(--accent);
+      color: #171717;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #B8962E;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #171717;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(23, 23, 23, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: fixed;
+      width: calc(100% - 40px);
+      top: 15px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .flex-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo-text {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--nav-text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin: 0 2rem;
+    }
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--nav-text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+      position: relative;
+    }
+    .dropdown-btn::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute;
+      left: -1rem;
+      margin-top: 1rem;
+      width: 220px;
+      background: rgba(23, 23, 23, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      transform: translateY(10px);
+      z-index: 60;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(212,175,55,0.1); color: var(--accent); }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #171717; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn {
+      background: var(--accent);
+      color: #171717;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+    }
+    .login-btn:hover { background: #B8962E; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    
+    @media (max-width: 1180px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(212,175,55,0.15);
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+    .hamburger-icon, .close-icon {
+      font-size: 1.8rem;
+      color: var(--nav-text);
+    }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+    
+    .mobile-menu-panel {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-nav);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-nav-link {
+      color: var(--nav-text);
+      text-decoration: none;
+      display: block;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(212,175,55,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover, .mobile-dropdown-btn.active { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.3);
+    }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a {
+      display: block;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
+    .mobile-login-btn {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: var(--accent);
+      color: #171717;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-theme-rtl {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(212,175,55,0.15);
+      flex-wrap: wrap;
+    }
+    .mobile-icon-btn {
+      background: rgba(212,175,55,0.15);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: var(--nav-text);
+      cursor: pointer;
+    }
+    .mobile-icon-btn:hover { background: var(--accent); color: #171717; }
+
+    /* Page Header */
+    .page-header {
+      padding: 180px 0 100px;
+      background: var(--bg-secondary);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* Container & Sections */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 100px 0; border-bottom: 1px solid var(--border-color); }
+    .section-title {
+      font-size: 3rem;
+      font-family: 'Oswald', sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+    .accent-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem auto 2rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Contact Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Contact Info Cards */
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+    }
+    .contact-info-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .contact-info-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: rgba(212,175,55,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon i {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    .contact-info-text h4 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+    }
+    .contact-info-text p, .contact-info-text a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .contact-info-text a:hover { color: var(--accent); }
+
+    /* Contact Form */
+    .contact-form-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .contact-form-wrapper h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-form-wrapper > p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .form-group label span { color: var(--accent); }
+    .form-control {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    .form-control::placeholder { color: var(--text-muted); }
+    textarea.form-control {
+      min-height: 140px;
+      resize: vertical;
+    }
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23D4AF37'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    /* Map Section */
+    .map-wrapper {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+    .map-wrapper iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+      display: block;
+    }
+
+    /* FAQ Quick */
+    .faq-item { background: var(--bg-card); margin-bottom: 1rem; border-left: 3px solid var(--accent); border-radius: 12px; }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.2rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s;
+      padding: 0 1.2rem;
+      color: var(--text-secondary);
+    }
+    .faq-answer.open { max-height: 200px; padding-bottom: 1rem; }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: var(--bg-secondary);
+      text-align: center;
+      padding: 3rem;
+      border: 1px solid var(--accent);
+      border-radius: 28px;
+      margin-top: 3rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      padding-top: 80px;
+      padding-bottom: 40px;
+      border-top: 1px solid rgba(212,175,55,0.2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--footer-text);
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo {
+      font-size: 1.6rem!important;
+      font-weight: 700 !important;
+      color: var(--footer-text) !important;
+      text-decoration: none !important;
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: var(--footer-text-muted);
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-contact-item a:hover { color: var(--accent); }
+    .footer-copyright {
+      border-top: 1px solid rgba(212,175,55,0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--footer-text-muted);
+      font-size: 0.8rem;
+    }
+    .footer-copyright a {
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: 0.2s;
+    }
+    .footer-copyright a:hover { color: var(--accent); }
+
+    /* Image Feature */
+    .contact-feature-image {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (max-width: 1024px) {
+      .section-title { font-size: 2.5rem; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 2rem; }
+      section { padding: 60px 0; }
+      .page-header { padding: 140px 0 60px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrapper { padding: 1.5rem; }
+      .cta-banner { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link active">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link active">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="font-heading">Get in <span class="text-accent">Touch</span></h1>
+    <p>Have a question or ready to book? We'd love to hear about your event. Reach out and we'll respond within 24 hours.</p>
+  </div>
+</div>
+
+<!-- SECTION 1: CONTACT INFO + FORM -->
+<section>
+  <div class="container">
+    <div class="contact-grid">
+      
+      <!-- LEFT: Contact Info -->
+      <div>
+        <h3 class="font-heading" style="font-size:1.8rem; margin-bottom:0.5rem;">Contact <span class="text-accent">Information</span></h3>
+        <p style="color: var(--text-secondary); margin-bottom:2rem;">We're here to help you create an unforgettable event experience.</p>
+        
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-info-text">
+            <h4>Visit Us</h4>
+            <p>123 Celebration Ave, Suite 400</p>
+            <p>Los Angeles, CA 90015</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="contact-info-text">
+            <h4>Call Us</h4>
+            <a href="tel:+18885557627">+1 (888) 555-7627</a>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Mon–Fri, 9am – 7pm PST</p>
+          </div>
+        </div>
+        
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-info-text">
+            <h4>Email Us</h4>
+            <a href="mailto:hello@snapjoy.com">hello@snapjoy.com</a>
+            <a href="mailto:bookings@snapjoy.com">bookings@snapjoy.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-info-text">
+            <h4>Service Hours</h4>
+            <p>Events: 7 days a week</p>
+            <p style="font-size:0.85rem; color:var(--text-muted);">Setup available until 11pm</p>
+          </div>
+        </div>
+
+       
+      </div>
+
+      <!-- RIGHT: Contact Form -->
+      <div class="contact-form-wrapper">
+        <h3>Send Us a <span class="text-accent">Message</span></h3>
+        <p>Fill out the form below and our team will get back to you within 24 hours with a custom quote.</p>
+        
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name <span>*</span></label>
+              <input type="text" class="form-control" placeholder="John & Jane Doe" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address <span>*</span></label>
+              <input type="email" class="form-control" placeholder="you@example.com" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number <span>*</span></label>
+              <input type="tel" class="form-control" placeholder="(555) 123-4567" required>
+            </div>
+            <div class="form-group">
+              <label>Event Date</label>
+              <input type="date" class="form-control">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Event Type <span>*</span></label>
+              <select class="form-control" required>
+                <option value="">Select event type</option>
+                <option>Wedding</option>
+                <option>Corporate Event</option>
+                <option>Birthday Party</option>
+                <option>Anniversary</option>
+                <option>Fundraiser / Gala</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Booth Preference</label>
+              <select class="form-control">
+                <option value="">Select a booth</option>
+                <option>Open Air Booth</option>
+                <option>Mirror Booth</option>
+                <option>360 Video Booth</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Event Location</label>
+            <input type="text" class="form-control" placeholder="Venue name or city">
+          </div>
+          
+          <div class="form-group">
+            <label>Tell Us About Your Event <span>*</span></label>
+            <textarea class="form-control" placeholder="Guest count, theme, special requests..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          
+          <p id="form-message" style="display:none; margin-top:1rem; text-align:center; color:var(--accent); font-weight:600;">
+            <i class="fas fa-check-circle"></i> Thank you! We'll be in touch within 24 hours.
+          </p>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: MAP -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Find <span class="text-accent">Us</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">Visit our showroom to see our booths in person, or we can come to you.</p>
+    <div class="map-wrapper">
+      <iframe src="https://maps.google.com/maps?q=Los%20Angeles,%20CA%2090015&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: QUICK FAQ -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Quick <span class="text-accent">Answers</span></h2>
+    <div class="accent-divider"></div>
+    <div style="max-width:800px; margin:0 auto;">
+      <div class="faq-item"><button class="faq-question">How far in advance should I book? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">We recommend booking 2-3 months ahead for peak wedding season. However, we can accommodate last-minute requests based on availability.</div></div>
+      <div class="faq-item"><button class="faq-question">Do you travel to my venue? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">Yes! We serve the greater metro area and surrounding regions. Travel fees may apply for locations beyond 50 miles.</div></div>
+      <div class="faq-item"><button class="faq-question">Can I customize the backdrop? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">Absolutely. We offer custom backdrops, branded overlays, and themed props to match your event's aesthetic.</div></div>
+      <div class="faq-item"><button class="faq-question">What's included in the rental? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">Every rental includes delivery, setup, an attendant, unlimited prints, digital sharing, and a curated prop collection.</div></div>
+    </div>
+    
+    <div class="cta-banner">
+      <h3 class="font-heading" style="font-size:2rem;">Prefer to <span class="text-accent">Talk?</span></h3>
+      <p style="margin:1rem 0; color: var(--text-secondary);">Call us directly for immediate assistance and same-day availability checks.</p>
+      <a href="tel:+18885557627" class="btn-primary"><i class="fas fa-phone"></i> (888) 555-SNAP</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a><p>Premium photo booth and event rentals. Creating memories with style and elegance.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="#">Open Air Booth</a><a href="#">Mirror Booth</a><a href="#">360 Video Booth</a><a href="#">Custom Backdrops</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Book Now</a><a href="#">Packages & Pricing</a><a href="#">FAQ</a><a href="#">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885557627">+1 (888) 555-7627</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:hello@snapjoy.com">hello@snapjoy.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 SnapJoy — Photo Booth & Event Rentals. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if(body.classList.contains('dark')) { body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false); }
+    else { body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true); }
+  }
+  if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+  
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() { if(htmlEl.getAttribute('dir') === 'rtl') { htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr'); } else { htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl'); } }
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if(localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+  
+  // Mobile Menu
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() { mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active'); document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : ''; }
+  if(mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => { link.addEventListener('click', () => { if(mobilePanel.classList.contains('show')) toggleMobile(); }); });
+  
+  // Mobile Dropdowns
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if(menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if(i !== icon) i.classList.remove('rotated'); });
+      if(submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+  
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.nextElementSibling;
+      ans.classList.toggle('open');
+      const icon = btn.querySelector('.fa-chevron-down');
+      if(icon) icon.style.transform = ans.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+  });
+  
+  // Contact Form Submit
+  const contactForm = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+  if(contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      formMessage.style.display = 'block';
+      contactForm.reset();
+      setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+    });
+  }
+  
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const target = document.querySelector(targetId);
+      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); if(mobilePanel?.classList.contains('show')) toggleMobile(); }
+    });
+  });
+  window.addEventListener('resize', () => { if(window.innerWidth > 1180 && mobilePanel?.classList.contains('show')) toggleMobile(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Service Details | SnapJoy Photo Booth & Event Rentals</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23D4AF37'%3E%3Cpath d='M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z'/%3E%3C/svg%3E">
+  <meta name="description" content="Detailed information about SnapJoy's photo booth services.">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SnapJoy three-color system --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F8F8;
+      --bg-card: #FFFFFF;
+      --bg-nav: #171717;
+      --text-primary: #171717;
+      --text-secondary: #2C2C2C;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #171717;
+    }
+    body.dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1A1A1A;
+      --bg-nav: #0A0A0A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #0A0A0A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading { font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+    .text-accent { color: var(--accent); }
+
+    .btn-primary {
+      background: var(--accent); color: #171717; font-weight: 700;
+      padding: 0.9rem 2rem; border-radius: 40px;
+      transition: all 0.3s ease; display: inline-flex; align-items: center;
+      gap: 10px; border: none; text-transform: uppercase;
+      letter-spacing: 1px; font-size: 0.85rem; cursor: pointer;
+      text-decoration: none; font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(212,175,55,0.4); }
+    .btn-outline {
+      background: transparent; border: 2px solid var(--accent);
+      color: var(--accent); padding: 0.8rem 1.8rem;
+      border-radius: 40px; transition: all 0.3s ease;
+      font-weight: 600; display: inline-flex; align-items: center;
+      gap: 8px; cursor: pointer; text-decoration: none;
+    }
+    .btn-outline:hover { background: var(--accent); color: #171717; box-shadow: 0 4px 15px rgba(212,175,55,0.3); }
+
+    /* NAVBAR (exact same as index.html) */
+    .navbar {
+      background: rgba(23, 23, 23, 0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      position: fixed; width: calc(100% - 40px); top: 15px; left: 20px;
+      z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(212,175,55,0.15); border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+    .flex-nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .nav-logo-text {
+      font-size: 1.6rem !important; font-weight: 700 !important;
+      color: var(--nav-text); text-decoration: none;
+      letter-spacing: -0.5px; display: inline-block;
+      line-height: 1; font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu-container { display: flex; align-items: center; justify-content: center; flex: 1; margin: 0 2rem; }
+    .nav-links-group { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-link {
+      color: var(--nav-text); font-weight: 500; transition: color 0.3s;
+      padding: 0.5rem 0; font-size: 0.95rem; text-decoration: none;
+      white-space: nowrap; position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; left: 0; }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+
+    .dropdown-container { position: relative; display: inline-block; }
+    .dropdown-btn {
+      background: none; border: none; color: var(--nav-text);
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+      padding: 0.5rem 0; cursor: pointer; font-size: 0.95rem;
+      transition: all 0.3s; white-space: nowrap; position: relative;
+    }
+    .dropdown-btn::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after { width: 100%; left: 0; }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute; left: -1rem; margin-top: 1rem; width: 220px;
+      background: rgba(23, 23, 23, 0.96); backdrop-filter: blur(12px);
+      border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+      transform: translateY(10px); z-index: 60;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a {
+      display: block; padding: 0.8rem 1.5rem; color: #FFFFFF;
+      text-decoration: none; font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(212,175,55,0.1); color: var(--accent); }
+
+    .nav-buttons { display: flex; align-items: center; gap: 0.75rem; }
+    .icon-btn {
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.05); display: flex;
+      align-items: center; justify-content: center; cursor: pointer;
+      transition: 0.3s; color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #171717; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn { background: var(--accent); color: #171717; padding: 0.6rem 1.5rem; border-radius: 999px; font-weight: 700; text-decoration: none; font-size: 0.85rem; font-family: 'Oswald', sans-serif; transition: 0.3s; }
+    .login-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    .login-btn-secondary { background: transparent; color: var(--nav-text); padding: 0.6rem 1.5rem; border-radius: 999px; font-weight: 700; text-decoration: none; font-size: 0.85rem; font-family: 'Oswald', sans-serif; border: 2px solid rgba(255,255,255,0.2); transition: 0.3s; }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 1180px) {
+      .navbar { width: 100%; top: 0; left: 0; border-radius: 0; border: none; border-bottom: 1px solid rgba(212,175,55,0.15); }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+    .hamburger-icon, .close-icon { font-size: 1.8rem; color: var(--nav-text); }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+
+    .mobile-menu-panel {
+      position: fixed; top: 80px; left: 0; right: 0;
+      background: var(--bg-nav); max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease-out; z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-nav-link { color: var(--nav-text); text-decoration: none; display: block; padding: 1rem 1.5rem; font-weight: 500; }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(212,175,55,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%; background: none; border: none; color: var(--nav-text);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.5rem; font-size: 1rem; text-align: left;
+      cursor: pointer; font-weight: 500;
+    }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(0,0,0,0.3); }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a { display: block; padding: 0.75rem 1rem 0.75rem 2.5rem; color: var(--nav-text); text-decoration: none; opacity: 0.8; font-size: 0.9rem; }
+    .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
+    .mobile-login-btn { display: inline-block; margin: 1rem 1.5rem; background: var(--accent); color: #171717; padding: 0.75rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; text-align: center; }
+    .mobile-login-btn-secondary { display: inline-block; margin: 1rem 1.5rem; background: transparent; color: var(--nav-text); padding: 0.75rem 1.5rem; border-radius: 999px; border: 2px solid rgba(255,255,255,0.2); text-decoration: none; font-weight: 700; text-align: center; }
+    .mobile-theme-rtl { display: flex; gap: 1rem; padding: 1rem 1.5rem; border-top: 1px solid rgba(212,175,55,0.15); flex-wrap: wrap; }
+    .mobile-icon-btn { background: rgba(212,175,55,0.15); border: none; padding: 0.6rem 1rem; border-radius: 999px; color: var(--nav-text); cursor: pointer; }
+
+    /* HERO */
+    .detail-hero {
+      position: relative; height: 65vh; min-height: 480px;
+      display: flex; align-items: flex-end;
+      padding-top: 100px; overflow: hidden;
+    }
+    .detail-hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      z-index: 0;
+      transition: transform 0.6s ease;
+    }
+    .detail-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.35) 100%);
+      z-index: 1;
+    }
+    .detail-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1280px; margin: 0 auto; padding: 0 1.5rem 3rem;
+      width: 100%; color: #FFFFFF;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; margin-bottom: 1rem; color: rgba(255,255,255,0.8);
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb i { font-size: 0.7rem; }
+    .detail-hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-family: 'Oswald', sans-serif; margin-bottom: 0.8rem;
+      line-height: 1.1; letter-spacing: 1px;
+    }
+    .detail-hero-content p {
+      font-size: 1.05rem; max-width: 700px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Content */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .detail-body { padding: 80px 0; }
+
+    .detail-grid {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;
+      align-items: start;
+    }
+
+    .detail-main h2 {
+      font-family: 'Oswald', sans-serif; font-size: 2rem;
+      margin-bottom: 1rem; letter-spacing: 0.5px;
+    }
+    .detail-main p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1rem; }
+
+    .feature-list {
+      list-style: none; padding: 0; margin: 1.5rem 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
+    }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      color: var(--text-secondary); font-size: 0.95rem;
+      padding: 0.7rem 1rem; background: var(--bg-secondary);
+      border-radius: 12px; border: 1px solid var(--border-color);
+    }
+    .feature-list li i { color: var(--accent); margin-top: 3px; flex-shrink: 0; }
+
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1rem; margin: 2rem 0;
+    }
+    .gallery-grid img {
+      width: 100%; height: 220px; object-fit: cover;
+      border-radius: 16px; border: 1px solid var(--border-color);
+      transition: all 0.3s;
+    }
+    .gallery-grid img:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    /* Sidebar */
+    .detail-sidebar {
+      position: sticky; top: 120px;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 24px; padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-price {
+      font-family: 'Oswald', sans-serif; font-size: 2.5rem;
+      color: var(--accent); margin-bottom: 0.3rem; line-height: 1;
+    }
+    .sidebar-price-label { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .sidebar-divider { height: 1px; background: var(--border-color); margin: 1.5rem 0; }
+    .sidebar-info { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.5rem; }
+    .sidebar-info-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.9rem; color: var(--text-secondary);
+    }
+    .sidebar-info-item i { color: var(--accent); width: 18px; text-align: center; }
+
+    @media (max-width: 992px) {
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-sidebar { position: relative; top: 0; }
+      .feature-list { grid-template-columns: 1fr; }
+      .detail-hero { height: 55vh; }
+    }
+
+    /* Related services */
+    .related-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .related-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 20px; overflow: hidden;
+      transition: all 0.3s; text-decoration: none; color: inherit;
+      display: block;
+    }
+    .related-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: var(--shadow); }
+    .related-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .related-card-body { padding: 1.4rem; }
+    .related-card-body h3 { font-family: 'Oswald', sans-serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .related-card-body p { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.8rem; }
+    .related-card-body .related-price { color: var(--accent); font-weight: 700; font-size: 0.9rem; font-family: 'Oswald', sans-serif; }
+
+    @media (max-width: 992px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    /* CTA */
+    .cta-banner {
+      background: var(--bg-secondary); text-align: center;
+      padding: 3rem; border: 1px solid var(--accent);
+      border-radius: 28px; margin-top: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg); padding-top: 80px;
+      padding-bottom: 40px; border-top: 1px solid rgba(212,175,55,0.2);
+    }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem; }
+    .footer-col h4 { font-size: 1.2rem; margin-bottom: 1.2rem; font-weight: 700; color: var(--footer-text); font-family: 'Oswald', sans-serif; }
+    .footer-col a { display: block; color: var(--footer-text-muted); text-decoration: none; margin-bottom: 0.6rem; transition: 0.2s; font-size: 0.85rem; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo { font-size: 1.6rem!important; font-weight: 700 !important; color: var(--footer-text) !important; text-decoration: none !important; font-family: 'Oswald', sans-serif; display: inline-block; margin-bottom: 1rem; }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a { display: inline-block; margin-right: 1rem; font-size: 1.2rem; color: var(--footer-text-muted); transition: 0.2s; }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-copyright {
+      border-top: 1px solid rgba(212,175,55,0.2); padding-top: 2rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: 1rem; color: var(--footer-text-muted); font-size: 0.8rem;
+    }
+    .footer-copyright a { color: var(--footer-text-muted); text-decoration: none; margin-left: 1rem; transition: 0.2s; }
+    .footer-copyright a:hover { color: var(--accent); }
+
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .detail-body { padding: 40px 0; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR (exact same as index.html) -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link active">Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link active">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO (dynamic) -->
+<div class="detail-hero">
+  <div class="detail-hero-bg" id="hero-bg"></div>
+  <div class="detail-hero-overlay"></div>
+  <div class="detail-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="service.html">Services</a>
+      <i class="fas fa-chevron-right"></i>
+      <span id="breadcrumb-name">Service</span>
+    </div>
+    <h1 id="service-title" class="font-heading">Service</h1>
+    <p id="service-subtitle"></p>
+  </div>
+</div>
+
+<!-- BODY (dynamic) -->
+<div class="detail-body">
+  <div class="container">
+    <div class="detail-grid">
+
+      <!-- Main content -->
+      <div class="detail-main">
+        <h2 id="section-about-title">About This Service</h2>
+        <p id="section-about-text"></p>
+
+        <h2 style="margin-top:2rem;">What's Included</h2>
+        <ul class="feature-list" id="feature-list"></ul>
+
+        <h2 style="margin-top:2rem;">Gallery</h2>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="detail-sidebar">
+        <div class="sidebar-price" id="sidebar-price">$0</div>
+        <div class="sidebar-price-label" id="sidebar-price-label">Starting price</div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-info">
+          <div class="sidebar-info-item"><i class="fas fa-clock"></i> <span id="sidebar-duration">Duration</span></div>
+          <div class="sidebar-info-item"><i class="fas fa-users"></i> <span id="sidebar-capacity">Guest capacity</span></div>
+          <div class="sidebar-info-item"><i class="fas fa-map-marker-alt"></i> <span>On-location setup</span></div>
+          <div class="sidebar-info-item"><i class="fas fa-shield-alt"></i> <span>Fully insured</span></div>
+          <div class="sidebar-info-item"><i class="fas fa-star"></i> <span>5-star rated service</span></div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="contact.html" class="btn-primary" style="width:100%; justify-content:center; margin-bottom:0.8rem;">
+          <i class="fas fa-calendar-check"></i> Book This Service
+        </a>
+        <a href="service.html" class="btn-outline" style="width:100%; justify-content:center;">
+          <i class="fas fa-arrow-left"></i> All Services
+        </a>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<!-- RELATED SERVICES (dynamic) -->
+<section style="padding: 80px 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+  <div class="container">
+    <h2 class="font-heading" style="font-size:2.2rem; text-align:center; margin-bottom:0.8rem;">Explore Other <span class="text-accent">Services</span></h2>
+    <div style="width:80px; height:3px; background:var(--accent); margin: 0 auto 2.5rem;"></div>
+    <div class="related-grid" id="related-grid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding: 80px 0;">
+  <div class="container">
+    <div class="cta-banner">
+      <h3 class="font-heading" style="font-size:2rem;">Ready to <span class="text-accent">Book?</span></h3>
+      <p style="margin:1rem 0; color: var(--text-secondary);">Get a custom quote within 24 hours. Let's create memories together.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary"><i class="fas fa-paper-plane"></i> Contact Us</a>
+        <a href="faq.html" class="btn-outline">Read FAQ <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a><p>Premium photo booth and event rentals. Creating memories with style and elegance.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="service-details.html?service=open-air">Open Air Booth</a><a href="service-details.html?service=mirror">Mirror Booth</a><a href="service-details.html?service=360">360 Video Booth</a><a href="service-details.html?service=backdrops">Custom Backdrops</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="contact.html">Book Now</a><a href="service.html">Packages & Pricing</a><a href="faq.html">FAQ</a><a href="blog.html">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885557627">+1 (888) 555-7627</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:hello@snapjoy.com">hello@snapjoy.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 SnapJoy — Photo Booth & Event Rentals. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // ===== Service Data (dynamic content) =====
+  const servicesData = {
+    "open-air": {
+      title: "Open Air Photo Booth",
+      subtitle: "Spacious, modern, and group-friendly — the classic photo booth experience reimagined.",
+      heroImage: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1600&auto=format&fit=crop",
+      price: "From $599",
+      priceLabel: "Starting price / 3 hours",
+      duration: "3 hours (extendable)",
+      capacity: "Up to 10 guests per photo",
+      about: "Our Open Air Photo Booth is the perfect choice for weddings, birthday parties, corporate events, and any celebration where guests love to have fun. With a spacious open design, it accommodates large groups comfortably while maintaining an elegant look that fits any event theme. Equipped with a professional DSLR camera, studio lighting, and instant printing, this booth delivers stunning photos every single time.",
+      features: [
+        "Fits up to 10 guests per shot",
+        "Professional DSLR camera",
+        "Studio-quality lighting rig",
+        "Unlimited instant prints",
+        "Curated prop collection",
+        "Custom photo template",
+        "Digital sharing via QR code",
+        "Friendly on-site attendant"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop"
+      ]
+    },
+    "mirror": {
+      title: "Mirror Photo Booth",
+      subtitle: "Sleek, interactive, and luxurious — the mirror booth is the ultimate modern photo experience.",
+      heroImage: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=1600&auto=format&fit=crop",
+      price: "From $749",
+      priceLabel: "Starting price / 4 hours",
+      duration: "4 hours (extendable)",
+      capacity: "Up to 6 guests per photo",
+      about: "Elevate your event with our stunning Mirror Photo Booth — a full-length interactive mirror with a 65-inch touchscreen that guides guests through a fun, animated photo experience. Its elegant design complements weddings, galas, and high-end corporate events, while its interactive prompts keep guests entertained all night long.",
+      features: [
+        "65-inch interactive touchscreen",
+        "Animated on-screen prompts",
+        "Instant photo printing",
+        "Custom branded photo template",
+        "Digital sharing options",
+        "Elegant full-length mirror design",
+        "Premium prop collection",
+        "Professional attendant included"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop"
+      ]
+    },
+    "360": {
+      title: "360 Video Booth",
+      subtitle: "Capture the moment in stunning slow-motion 360° video — the life of every modern party.",
+      heroImage: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&auto=format&fit=crop",
+      price: "From $899",
+      priceLabel: "Starting price / 5 hours",
+      duration: "5 hours (extendable)",
+      capacity: "1–4 guests per video",
+      about: "The 360 Video Booth is the ultimate crowd-pleaser. Guests step onto our LED-lit platform while a professional camera orbits around them, capturing stunning slow-motion videos that they can share instantly on social media. Perfect for birthdays, corporate activations, weddings, and any event that wants a modern, high-energy vibe.",
+      features: [
+        "Professional 360° slow-motion video",
+        "LED backdrop & platform lighting",
+        "Custom branded overlays",
+        "Instant social media sharing",
+        "Unlimited video recordings",
+        "Props & costume accessories",
+        "Digital gallery after event",
+        "On-site technician included"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop"
+      ]
+    },
+    "wedding": {
+      title: "Wedding Packages",
+      subtitle: "Your wedding day deserves the very best — elegant, reliable, and unforgettable.",
+      heroImage: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&auto=format&fit=crop",
+      price: "From $1,199",
+      priceLabel: "Starting price / 5 hours",
+      duration: "5 hours (extendable)",
+      capacity: "Up to 10 guests per photo",
+      about: "Our wedding packages are designed for couples who want the very best on their special day. Choose from any of our booth styles, add custom monogram photo templates, premium floral or sequin backdrops, and a beautifully bound guest photo album. Our team works closely with your wedding planner to ensure flawless timing and an experience your guests will remember forever.",
+      features: [
+        "Choice of booth style",
+        "Custom monogram photo template",
+        "Premium floral or sequin backdrop",
+        "Guest photo album included",
+        "Unlimited prints & digital sharing",
+        "Professional on-site attendant",
+        "Coordination with wedding planner",
+        "Setup 90 minutes before reception"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop"
+      ]
+    },
+    "corporate": {
+      title: "Corporate Activations",
+      subtitle: "Fully branded photo experiences that generate buzz and leave a lasting impression.",
+      heroImage: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600&auto=format&fit=crop",
+      price: "Custom",
+      priceLabel: "Tailored quote for your brand",
+      duration: "Flexible",
+      capacity: "Multi-booth setups available",
+      about: "Elevate your brand at conferences, product launches, trade shows, and company galas. We design fully branded photo experiences that engage your audience, generate leads, and create shareable content that extends your brand's reach far beyond the event itself. From custom overlays to lead capture and analytics, we deliver measurable ROI.",
+      features: [
+        "Full brand integration & logo overlays",
+        "Custom printed backdrops",
+        "Lead capture & analytics",
+        "Multi-booth setups available",
+        "Branded props & giveaways",
+        "Social media auto-sharing",
+        "On-site brand ambassadors",
+        "Post-event photo gallery"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop"
+      ]
+    },
+    "backdrops": {
+      title: "Custom Backdrops & Props",
+      subtitle: "Make your photo booth truly one-of-a-kind with custom-designed backdrops and props.",
+      heroImage: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1600&auto=format&fit=crop",
+      price: "From $199",
+      priceLabel: "Add-on to any booth rental",
+      duration: "Full event duration",
+      capacity: "Customizable",
+      about: "The right backdrop transforms a photo booth from ordinary to extraordinary. We offer an extensive collection of sequin walls, floral arrangements, fabric drapes, and fully custom printed designs. Pair your backdrop with a themed prop collection and let our stylists handle all the setup — so all you have to do is smile.",
+      features: [
+        "Sequin, floral & fabric backdrops",
+        "Fully custom printed designs",
+        "Themed prop collections",
+        "On-site styling & setup",
+        "LED uplighting options",
+        "Color-matched to your event",
+        "Premium quality materials",
+        "Rental or purchase options"
+      ],
+      gallery: [
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop"
+      ]
+    }
+  };
+
+  // ===== Related services mapping =====
+  const relatedMap = {
+    "open-air": ["mirror", "360", "wedding"],
+    "mirror": ["open-air", "wedding", "backdrops"],
+    "360": ["open-air", "mirror", "corporate"],
+    "wedding": ["mirror", "open-air", "backdrops"],
+    "corporate": ["360", "mirror", "backdrops"],
+    "backdrops": ["open-air", "mirror", "wedding"]
+  };
+
+  // ===== Read URL parameter and render =====
+  function getServiceKey() {
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get('service') || 'open-air';
+    return servicesData[key] ? key : 'open-air';
+  }
+
+  function renderService() {
+    const key = getServiceKey();
+    const s = servicesData[key];
+
+    // Hero
+    document.getElementById('hero-bg').style.backgroundImage = `url('${s.heroImage}')`;
+    document.getElementById('breadcrumb-name').textContent = s.title;
+    document.getElementById('service-title').innerHTML = s.title;
+    document.getElementById('service-subtitle').textContent = s.subtitle;
+
+    // About
+    document.getElementById('section-about-text').textContent = s.about;
+
+    // Features
+    const featureList = document.getElementById('feature-list');
+    featureList.innerHTML = s.features.map(f => `<li><i class="fas fa-check-circle"></i> <span>${f}</span></li>`).join('');
+
+    // Gallery
+    const gallery = document.getElementById('gallery-grid');
+    gallery.innerHTML = s.gallery.map(img => `<img src="${img}" alt="${s.title} gallery">`).join('');
+
+    // Sidebar
+    document.getElementById('sidebar-price').textContent = s.price;
+    document.getElementById('sidebar-price-label').textContent = s.priceLabel;
+    document.getElementById('sidebar-duration').textContent = s.duration;
+    document.getElementById('sidebar-capacity').textContent = s.capacity;
+
+    // Related Services
+    const related = relatedMap[key] || [];
+    const relatedGrid = document.getElementById('related-grid');
+    relatedGrid.innerHTML = related.map(rk => {
+      const r = servicesData[rk];
+      return `
+        <a href="service-details.html?service=${rk}" class="related-card">
+          <img src="${r.heroImage}" alt="${r.title}">
+          <div class="related-card-body">
+            <h3 class="font-heading">${r.title}</h3>
+            <p>${r.subtitle.substring(0, 80)}...</p>
+            <div class="related-price">${r.price}</div>
+          </div>
+        </a>
+      `;
+    }).join('');
+
+    document.title = `${s.title} | SnapJoy Photo Booth & Event Rentals`;
+  }
+
+  renderService();
+
+  // ===== Theme Toggle (same as index.html) =====
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false);
+    } else {
+      body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true);
+    }
+  }
+  if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+
+  // ===== RTL Toggle (same as index.html) =====
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() {
+    if (htmlEl.getAttribute('dir') === 'rtl') {
+      htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr');
+    } else {
+      htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl');
+    }
+  }
+  if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if (localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+
+  // ===== Mobile Menu (same as index.html) =====
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() {
+    mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active');
+    document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : '';
+  }
+  if (mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => {
+    link.addEventListener('click', () => { if (mobilePanel.classList.contains('show')) toggleMobile(); });
+  });
+
+  // ===== Mobile Dropdowns (same as index.html) =====
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if (menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if (i !== icon) i.classList.remove('rotated'); });
+      if (submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+</script>
+</body>
+</html>

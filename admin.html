@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Admin Dashboard · SnapJoy</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23D4AF37'%3E%3Cpath d='M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z'/%3E%3C/svg%3E">
+  <meta name="description" content="SnapJoy admin dashboard — manage bookings, clients, events, and revenue.">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SnapJoy three-color system --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F8F8;
+      --bg-card: #FFFFFF;
+      --text-primary: #171717;
+      --text-secondary: #2C2C2C;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --sidebar-bg: #FAFAFA;
+      --success: #2B7A4B;
+      --warning: #B8860B;
+      --danger: #C84B31;
+      --info: #2C7BE5;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1A1A1A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --sidebar-bg: #0F0F0F;
+      --success: #3B9E6D;
+      --warning: #D4AF37;
+      --danger: #E05A3A;
+      --info: #4A90E2;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    h1,h2,h3,h4,h5,h6 { font-weight: 500; }
+
+    /* Utility */
+    .text-accent { color: var(--accent); }
+    .bg-accent { background: var(--accent); }
+    .bg-hover { background: var(--bg-secondary); }
+    .border-border { border-color: var(--border-color); }
+    .card-bg { background-color: var(--bg-card); }
+    .bg-sidebar { background-color: var(--sidebar-bg); }
+    .text-muted { color: var(--text-muted); }
+    .text-secondary-text { color: var(--text-secondary); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #171717;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    }
+
+    .btn-secondary {
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      border: 2px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      font-family: 'Oswald', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #171717;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background: var(--bg-card);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    .top-bar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .nav-logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+      gap: 0.5rem;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-logo-text i { color: var(--accent); font-size: 1.5rem; }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+    .icon-btn:hover {
+      background: var(--accent);
+      color: #171717;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--border-color);
+      margin-left: 0.5rem;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6F1E 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.9rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    .user-info p { color: var(--text-primary); font-size: 0.85rem; font-weight: 600; }
+    .user-info span { color: var(--text-muted); font-size: 0.75rem; }
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(212,175,55,0.2);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.15rem;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      width: 260px;
+      max-height: calc(100vh - 120px);
+      background-color: var(--sidebar-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 1.5rem 1.2rem;
+      overflow-y: auto;
+      z-index: 900;
+      transition: all 0.3s ease;
+    }
+    .sidebar::-webkit-scrollbar { width: 6px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+    .sidebar-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 0 0.75rem;
+      margin-bottom: 0.8rem;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      font-weight: 500;
+      font-size: 0.92rem;
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .sidebar-link i { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-link:hover, .sidebar-link.active {
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6F1E 100%);
+      color: #FFFFFF;
+    }
+    .sidebar-link .badge-count {
+      margin-left: auto;
+      background: rgba(255,255,255,0.25);
+      color: inherit;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .sidebar-link.active .badge-count { background: rgba(255,255,255,0.3); }
+    .sidebar-link .badge-count.danger { background: rgba(200,75,49,0.6); color: #FFFFFF; }
+
+    .logout-btn {
+      background-color: var(--danger);
+      color: white;
+      justify-content: center;
+      margin-top: 1rem;
+      border-top: none;
+    }
+    .logout-btn:hover { background-color: #A03A24 !important; color: #FFFFFF; }
+    .logout-btn i { color: white; }
+
+    html[dir="rtl"] .sidebar { left: auto; right: 20px; }
+    html[dir="rtl"] .main-content { margin-left: 0; margin-right: 320px; }
+    html[dir="rtl"] .sidebar-link { flex-direction: row-reverse; }
+    html[dir="rtl"] .sidebar-link .badge-count { margin-left: 0; margin-right: auto; }
+    html[dir="rtl"] .user-chip {
+      border-left: none;
+      border-right: 1px solid var(--border-color);
+      padding-left: 0;
+      padding-right: 1rem;
+      margin-left: 0;
+      margin-right: 0.5rem;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: 320px;
+      padding: 130px 2rem 2rem 2rem;
+      transition: margin 0.3s ease;
+      min-height: 100vh;
+    }
+
+    /* Dashboard cards */
+    .dashboard-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 1.6rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    .dashboard-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .page-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+    }
+    .page-sub {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stat-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.3rem 0;
+    }
+    .stat-trend { font-size: 0.75rem; color: var(--success); font-weight: 600; }
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(212,175,55,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+    .stat-icon.info { background: rgba(44,123,229,0.12); color: var(--info); }
+    .stat-icon.danger { background: rgba(200,75,49,0.12); color: var(--danger); }
+    .stat-icon.success { background: rgba(43,122,75,0.12); color: var(--success); }
+
+    .badge-success { background: rgba(43,122,75,0.12); color: var(--success); font-weight: 600; }
+    .badge-warning { background: rgba(184,134,11,0.15); color: var(--warning); font-weight: 600; }
+    .badge-danger  { background: rgba(200,75,49,0.12); color: var(--danger); font-weight: 600; }
+    .badge-info    { background: rgba(44,123,229,0.12); color: var(--info); font-weight: 600; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    table thead { border-bottom: 1px solid var(--border-color); }
+    table th {
+      padding: 0.8rem 0.5rem;
+      text-align: left;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      font-family: 'Oswald', sans-serif;
+    }
+    table td {
+      padding: 1rem 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    table tr:last-child td { border-bottom: none; }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      transition: all 0.3s;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Bar chart */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.8rem;
+      height: 180px;
+      padding: 1rem 0;
+    }
+    .bar-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bar {
+      width: 100%;
+      background: linear-gradient(180deg, #D4AF37 0%, #8B6F1E 100%);
+      border-radius: 8px 8px 4px 4px;
+      transition: all 0.4s ease;
+      position: relative;
+      min-height: 4px;
+    }
+    .bar:hover { opacity: 0.8; }
+    .bar-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .bar-value {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* Quick action tiles */
+    .action-tile {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .action-tile:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .action-tile .action-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+    }
+    .action-tile:hover .action-icon {
+      background: var(--accent);
+      color: #171717;
+    }
+    .action-tile h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+    .action-tile p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Status dots */
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+    }
+    .status-dot.online { background: var(--success); }
+    .status-dot.away { background: var(--warning); }
+    .status-dot.offline { background: var(--text-muted); }
+
+    /* Footer */
+    .dashboard-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+    .dashboard-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 0.75rem;
+      transition: color 0.2s;
+    }
+    .dashboard-footer a:hover { color: var(--accent); }
+
+    /* Mobile toggle for sidebar */
+    .mobile-sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #171717;
+      border: none;
+      cursor: pointer;
+      z-index: 950;
+      box-shadow: 0 10px 25px rgba(212,175,55,0.4);
+      font-size: 1.3rem;
+      transition: all 0.3s;
+    }
+    .mobile-sidebar-toggle:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+    html[dir="rtl"] .mobile-sidebar-toggle { right: auto; left: 20px; }
+
+    #mobile-overlay {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      position: fixed;
+      inset: 0;
+      z-index: 850;
+    }
+    #mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    /* Responsive */
+    @media (max-width: 1180px) {
+      .top-bar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .top-bar-container { height: 70px; }
+      .user-info { display: none; }
+
+      .sidebar {
+        top: 70px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.3s ease;
+      }
+      .sidebar.show {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 1.5rem 1.2rem;
+      }
+
+      .main-content {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 95px 1rem 2rem 1rem;
+      }
+      html[dir="rtl"] .main-content { margin-right: 0; }
+
+      .mobile-sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+    }
+    @media (max-width: 768px) {
+      .page-title { font-size: 1.5rem; }
+      .stat-value { font-size: 1.6rem; }
+      .dashboard-card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR (logo + rtl + theme, same style as index.html navbar, no menu) -->
+<div class="top-bar">
+  <div class="top-bar-container">
+    <a href="index.html" class="nav-logo-text">
+      <i class="fa-solid fa-camera-retro"></i><span>SNAPJOY</span>
+    </a>
+
+    <div class="top-bar-right">
+      <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+      <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      <div class="user-chip">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <p>Alex Doe</p>
+          <span>Administrator</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile sidebar toggle button -->
+<button id="mobile-sidebar-toggle" class="mobile-sidebar-toggle" title="Menu">
+  <i class="fas fa-bars"></i>
+</button>
+<div id="mobile-overlay"></div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar" class="sidebar">
+  <p class="sidebar-title">Admin Panel</p>
+
+  <a href="#" data-section="overview" class="sidebar-link active">
+    <i class="fas fa-gauge-high"></i>
+    <span>Overview</span>
+  </a>
+
+  <a href="#" data-section="bookings" class="sidebar-link">
+    <i class="fas fa-calendar-check"></i>
+    <span>All Bookings</span>
+    <span class="badge-count">12</span>
+  </a>
+
+  <a href="#" data-section="clients" class="sidebar-link">
+    <i class="fas fa-users"></i>
+    <span>Clients</span>
+    <span class="badge-count">248</span>
+  </a>
+
+  <a href="#" data-section="events" class="sidebar-link">
+    <i class="fas fa-camera-retro"></i>
+    <span>Event Calendar</span>
+  </a>
+
+  <a href="#" data-section="invoices" class="sidebar-link">
+    <i class="fas fa-receipt"></i>
+    <span>Invoices</span>
+    <span class="badge-count danger">3</span>
+  </a>
+
+  <a href="#" data-section="staff" class="sidebar-link">
+    <i class="fas fa-user-tie"></i>
+    <span>Staff</span>
+  </a>
+
+  <a href="#" data-section="settings" class="sidebar-link">
+    <i class="fas fa-gear"></i>
+    <span>Settings</span>
+  </a>
+
+  <a href="#" id="logoutBtn" class="sidebar-link logout-btn">
+    <i class="fas fa-sign-out-alt"></i>
+    <span>Logout</span>
+  </a>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+  <!-- OVERVIEW -->
+  <div id="overview" class="admin-section">
+    <h1 class="page-title">Admin Dashboard</h1>
+    <p class="page-sub">Welcome back, Alex. Here's what's happening across SnapJoy today.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+      <div class="dashboard-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <p class="stat-label">Total Revenue</p>
+            <p class="stat-value">$48,290</p>
+            <p class="stat-trend"><i class="fas fa-arrow-up"></i> 18.2% vs last month</p>
+          </div>
+          <div class="stat-icon success"><i class="fas fa-dollar-sign"></i></div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <p class="stat-label">Active Bookings</p>
+            <p class="stat-value">12</p>
+            <p class="stat-trend"><i class="fas fa-arrow-up"></i> 3 new this week</p>
+          </div>
+          <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <p class="stat-label">Total Clients</p>
+            <p class="stat-value">248</p>
+            <p class="stat-trend"><i class="fas fa-user-plus"></i> +14 new clients</p>
+          </div>
+          <div class="stat-icon info"><i class="fas fa-users"></i></div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <p class="stat-label">Pending Invoices</p>
+            <p class="stat-value">$3,240</p>
+            <p class="stat-trend" style="color: var(--danger);"><i class="fas fa-exclamation-circle"></i> 3 overdue</p>
+          </div>
+          <div class="stat-icon danger"><i class="fas fa-receipt"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+      <a href="#bookings" onclick="activateSection('bookings'); return false;" class="action-tile">
+        <div class="action-icon"><i class="fas fa-plus"></i></div>
+        <h3>New Booking</h3>
+        <p>Manually add a client booking</p>
+      </a>
+
+      <a href="#clients" onclick="activateSection('clients'); return false;" class="action-tile">
+        <div class="action-icon"><i class="fas fa-user-plus"></i></div>
+        <h3>Add Client</h3>
+        <p>Register a new client account</p>
+      </a>
+
+      <a href="#invoices" onclick="activateSection('invoices'); return false;" class="action-tile">
+        <div class="action-icon"><i class="fas fa-file-invoice"></i></div>
+        <h3>Create Invoice</h3>
+        <p>Send a new invoice to client</p>
+      </a>
+
+      <a href="#staff" onclick="activateSection('staff'); return false;" class="action-tile">
+        <div class="action-icon"><i class="fas fa-user-tie"></i></div>
+        <h3>Manage Staff</h3>
+        <p>Assign teams & schedules</p>
+      </a>
+    </div>
+
+    <!-- Revenue chart + Recent activity -->
+    <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+      <div class="dashboard-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <h3 class="font-heading" style="font-size:1.3rem;">Revenue (Last 6 Months)</h3>
+          <span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">
+            <i class="fas fa-arrow-up"></i> +18.2%
+          </span>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-wrap"><div class="bar-value">$5.2k</div><div class="bar" style="height:45%;"></div><div class="bar-label">May</div></div>
+          <div class="bar-wrap"><div class="bar-value">$6.1k</div><div class="bar" style="height:55%;"></div><div class="bar-label">Jun</div></div>
+          <div class="bar-wrap"><div class="bar-value">$7.4k</div><div class="bar" style="height:68%;"></div><div class="bar-label">Jul</div></div>
+          <div class="bar-wrap"><div class="bar-value">$6.8k</div><div class="bar" style="height:62%;"></div><div class="bar-label">Aug</div></div>
+          <div class="bar-wrap"><div class="bar-value">$8.9k</div><div class="bar" style="height:82%;"></div><div class="bar-label">Sep</div></div>
+          <div class="bar-wrap"><div class="bar-value">$10.2k</div><div class="bar" style="height:95%;"></div><div class="bar-label">Oct</div></div>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <h3 class="font-heading" style="font-size:1.3rem; margin-bottom:1.2rem;">Recent Activity</h3>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; gap:0.75rem;">
+            <div class="stat-icon" style="width:36px; height:36px; border-radius:50%; font-size:0.85rem; flex-shrink:0;">
+              <i class="fas fa-calendar-plus"></i>
+            </div>
+            <div>
+              <p style="font-size:0.85rem; font-weight:600;">New booking: Reed Wedding</p>
+              <p style="font-size:0.72rem; color:var(--text-muted);">2 minutes ago</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem;">
+            <div class="stat-icon success" style="width:36px; height:36px; border-radius:50%; font-size:0.85rem; flex-shrink:0;">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <p style="font-size:0.85rem; font-weight:600;">Invoice #INV-1012 paid</p>
+              <p style="font-size:0.72rem; color:var(--text-muted);">1 hour ago</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem;">
+            <div class="stat-icon info" style="width:36px; height:36px; border-radius:50%; font-size:0.85rem; flex-shrink:0;">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div>
+              <p style="font-size:0.85rem; font-weight:600;">New client registered</p>
+              <p style="font-size:0.72rem; color:var(--text-muted);">3 hours ago</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:0.75rem;">
+            <div class="stat-icon danger" style="width:36px; height:36px; border-radius:50%; font-size:0.85rem; flex-shrink:0;">
+              <i class="fas fa-exclamation"></i>
+            </div>
+            <div>
+              <p style="font-size:0.85rem; font-weight:600;">Invoice #INV-1024 overdue</p>
+              <p style="font-size:0.72rem; color:var(--text-muted);">5 hours ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Bookings table -->
+    <div class="dashboard-card" style="margin-top: 1.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 class="font-heading" style="font-size:1.3rem;">Recent Bookings</h3>
+        <button class="text-accent" style="background:none; border:none; font-weight:700; font-size:0.85rem; cursor:pointer;">View All</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Ref #</th>
+              <th>Client</th>
+              <th>Event</th>
+              <th>Booth</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5092</td>
+              <td>Emma Reed</td>
+              <td>Wedding</td>
+              <td>Mirror Booth</td>
+              <td>Sep 15, 2026</td>
+              <td style="font-weight:700;">$899</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5120</td>
+              <td>Michael Chen</td>
+              <td>Corporate Gala</td>
+              <td>360 Video Booth</td>
+              <td>Sep 22, 2026</td>
+              <td style="font-weight:700;">$1,299</td>
+              <td><span class="badge-warning" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Pending</span></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5184</td>
+              <td>Sophia Martinez</td>
+              <td>Sweet 16</td>
+              <td>Open Air Booth</td>
+              <td>Aug 30, 2026</td>
+              <td style="font-weight:700;">$599</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Completed</span></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5190</td>
+              <td>David Thompson</td>
+              <td>Anniversary</td>
+              <td>Open Air Booth</td>
+              <td>Oct 5, 2026</td>
+              <td style="font-weight:700;">$749</td>
+              <td><span class="badge-info" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">In Progress</span></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5201</td>
+              <td>Lisa Park</td>
+              <td>Birthday Party</td>
+              <td>Mirror Booth</td>
+              <td>Oct 12, 2026</td>
+              <td style="font-weight:700;">$899</td>
+              <td><span class="badge-danger" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Cancelled</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL BOOKINGS -->
+  <div id="bookings" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">📋</span> All Bookings</h2>
+      <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Manage and track all photo booth bookings across the platform.</p>
+
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn-primary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-plus"></i> New Booking</button>
+        <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-filter"></i> Filter</button>
+        <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-download"></i> Export</button>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Ref #</th><th>Client</th><th>Event</th><th>Booth</th><th>Date</th><th>Amount</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5092</td>
+              <td>Emma Reed</td><td>Wedding</td><td>Mirror Booth</td><td>Sep 15, 2026</td>
+              <td style="font-weight:700;">$899</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Confirmed</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Edit</button></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5120</td>
+              <td>Michael Chen</td><td>Corporate Gala</td><td>360 Video Booth</td><td>Sep 22, 2026</td>
+              <td style="font-weight:700;">$1,299</td>
+              <td><span class="badge-warning" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Pending</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Edit</button></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5184</td>
+              <td>Sophia Martinez</td><td>Sweet 16</td><td>Open Air Booth</td><td>Aug 30, 2026</td>
+              <td style="font-weight:700;">$599</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Completed</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Edit</button></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5190</td>
+              <td>David Thompson</td><td>Anniversary</td><td>Open Air Booth</td><td>Oct 5, 2026</td>
+              <td style="font-weight:700;">$749</td>
+              <td><span class="badge-info" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">In Progress</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Edit</button></td>
+            </tr>
+            <tr>
+              <td class="text-accent" style="font-weight:700; font-family:monospace;">#SJ-5201</td>
+              <td>Lisa Park</td><td>Birthday Party</td><td>Mirror Booth</td><td>Oct 12, 2026</td>
+              <td style="font-weight:700;">$899</td>
+              <td><span class="badge-danger" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Cancelled</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENTS -->
+  <div id="clients" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">👥</span> Clients</h2>
+      <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Manage all registered clients and their booking history.</p>
+
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn-primary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-user-plus"></i> Add Client</button>
+        <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-search"></i> Search</button>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Client</th><th>Email</th><th>Phone</th><th>Bookings</th><th>Total Spent</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">Emma Reed</td>
+              <td>emma@snapjoy.com</td>
+              <td>+1 213 555 0192</td>
+              <td>6</td>
+              <td style="font-weight:700;">$4,190</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Active</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Michael Chen</td>
+              <td>michael@techcorp.com</td>
+              <td>+1 415 555 0234</td>
+              <td>3</td>
+              <td style="font-weight:700;">$3,897</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Active</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Sophia Martinez</td>
+              <td>sophia@email.com</td>
+              <td>+1 626 555 0456</td>
+              <td>2</td>
+              <td style="font-weight:700;">$1,348</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Active</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">David Thompson</td>
+              <td>david.t@email.com</td>
+              <td>+1 310 555 0678</td>
+              <td>1</td>
+              <td style="font-weight:700;">$749</td>
+              <td><span class="badge-warning" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">New</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Lisa Park</td>
+              <td>lisa.park@email.com</td>
+              <td>+1 818 555 0890</td>
+              <td>2</td>
+              <td style="font-weight:700;">$1,798</td>
+              <td><span class="badge-danger" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Inactive</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENT CALENDAR -->
+  <div id="events" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">📅</span> Event Calendar</h2>
+      <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Upcoming events and assigned booth setups.</p>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.2rem;">
+        <div class="dashboard-card" style="padding:1.3rem; border-left:4px solid var(--accent);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="badge-success" style="padding:0.2rem 0.7rem; border-radius:999px; font-size:0.7rem;">Confirmed</span>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Sep 15</span>
+          </div>
+          <h3 class="font-heading" style="font-size:1.1rem; margin-bottom:0.3rem;">Reed Wedding</h3>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-map-marker-alt text-accent"></i> The Grand Hall, LA</p>
+          <p style="font-size:0.78rem; color:var(--text-muted);"><i class="fas fa-camera-retro text-accent"></i> Mirror Booth · 4 hrs</p>
+        </div>
+
+        <div class="dashboard-card" style="padding:1.3rem; border-left:4px solid var(--warning);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="badge-warning" style="padding:0.2rem 0.7rem; border-radius:999px; font-size:0.7rem;">Pending</span>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Sep 22</span>
+          </div>
+          <h3 class="font-heading" style="font-size:1.1rem; margin-bottom:0.3rem;">TechCorp Gala</h3>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-map-marker-alt text-accent"></i> Moscone Center, SF</p>
+          <p style="font-size:0.78rem; color:var(--text-muted);"><i class="fas fa-camera-retro text-accent"></i> 360 Video Booth · 5 hrs</p>
+        </div>
+
+        <div class="dashboard-card" style="padding:1.3rem; border-left:4px solid var(--info);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="badge-info" style="padding:0.2rem 0.7rem; border-radius:999px; font-size:0.7rem;">In Progress</span>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Oct 5</span>
+          </div>
+          <h3 class="font-heading" style="font-size:1.1rem; margin-bottom:0.3rem;">Thompson Anniversary</h3>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-map-marker-alt text-accent"></i> Private Residence, Malibu</p>
+          <p style="font-size:0.78rem; color:var(--text-muted);"><i class="fas fa-camera-retro text-accent"></i> Open Air Booth · 3 hrs</p>
+        </div>
+
+        <div class="dashboard-card" style="padding:1.3rem; border-left:4px solid var(--danger);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="badge-danger" style="padding:0.2rem 0.7rem; border-radius:999px; font-size:0.7rem;">Cancelled</span>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Oct 12</span>
+          </div>
+          <h3 class="font-heading" style="font-size:1.1rem; margin-bottom:0.3rem;">Park Birthday</h3>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-map-marker-alt text-accent"></i> Rooftop Lounge, DTLA</p>
+          <p style="font-size:0.78rem; color:var(--text-muted);"><i class="fas fa-camera-retro text-accent"></i> Mirror Booth · 3 hrs</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVOICES -->
+  <div id="invoices" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">🧾</span> Invoices</h2>
+      <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Manage billing, payments, and overdue invoices.</p>
+
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn-primary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-plus"></i> Create Invoice</button>
+        <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-download"></i> Export</button>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Invoice #</th><th>Client</th><th>Ref</th><th>Date</th><th>Due</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family:monospace; font-weight:700;">INV-1024</td>
+              <td>Emma Reed</td><td>#SJ-5092</td><td>Aug 18, 2026</td><td>Sep 18, 2026</td>
+              <td style="font-weight:700;">$899</td>
+              <td><span class="badge-warning" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Due</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Send Reminder</button></td>
+            </tr>
+            <tr>
+              <td style="font-family:monospace; font-weight:700;">INV-1012</td>
+              <td>Sophia Martinez</td><td>#SJ-5184</td><td>Jul 30, 2026</td><td>Aug 30, 2026</td>
+              <td style="font-weight:700;">$599</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Paid</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-family:monospace; font-weight:700;">INV-1008</td>
+              <td>Michael Chen</td><td>#SJ-5120</td><td>Jun 12, 2026</td><td>Jul 12, 2026</td>
+              <td style="font-weight:700;">$1,299</td>
+              <td><span class="badge-success" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Paid</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">View</button></td>
+            </tr>
+            <tr>
+              <td style="font-family:monospace; font-weight:700;">INV-1002</td>
+              <td>David Thompson</td><td>#SJ-5190</td><td>May 20, 2026</td><td>Jun 20, 2026</td>
+              <td style="font-weight:700;">$749</td>
+              <td><span class="badge-danger" style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.72rem;">Overdue</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Send Reminder</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAFF -->
+  <div id="staff" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">👔</span> Staff Management</h2>
+      <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Manage team members, assignments, and availability.</p>
+
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <button class="btn-primary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-user-plus"></i> Add Staff</button>
+        <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-calendar"></i> Schedule</button>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Role</th><th>Email</th><th>Phone</th><th>Events</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">Marcus Reed</td>
+              <td>Lead Technician</td>
+              <td>marcus@snapjoy.com</td>
+              <td>+1 213 555 1001</td>
+              <td>8</td>
+              <td><span style="display:flex; align-items:center; font-size:0.8rem;"><span class="status-dot online"></span> Available</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Assign</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Maya Chen</td>
+              <td>Event Coordinator</td>
+              <td>maya@snapjoy.com</td>
+              <td>+1 213 555 1002</td>
+              <td>6</td>
+              <td><span style="display:flex; align-items:center; font-size:0.8rem;"><span class="status-dot away"></span> On Event</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Assign</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Jordan Ellis</td>
+              <td>Technician</td>
+              <td>jordan@snapjoy.com</td>
+              <td>+1 213 555 1003</td>
+              <td>5</td>
+              <td><span style="display:flex; align-items:center; font-size:0.8rem;"><span class="status-dot online"></span> Available</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Assign</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Nina Patel</td>
+              <td>Technician</td>
+              <td>nina@snapjoy.com</td>
+              <td>+1 213 555 1004</td>
+              <td>4</td>
+              <td><span style="display:flex; align-items:center; font-size:0.8rem;"><span class="status-dot offline"></span> Off Duty</span></td>
+              <td><button class="text-accent" style="background:none; border:none; font-weight:700; cursor:pointer;">Assign</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="settings" class="admin-section" style="display:none;">
+    <div class="dashboard-card">
+      <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:1.5rem;"><span class="text-accent">⚙️</span> Settings</h2>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
+        <div>
+          <label class="form-label">Company Name</label>
+          <input type="text" class="form-control" value="SnapJoy Photo Booth & Event Rentals">
+        </div>
+        <div>
+          <label class="form-label">Contact Email</label>
+          <input type="email" class="form-control" value="hello@snapjoy.com">
+        </div>
+        <div>
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" value="+1 (888) 555-7627">
+        </div>
+        <div>
+          <label class="form-label">Service Area</label>
+          <input type="text" class="form-control" value="Los Angeles Metro + 100 miles">
+        </div>
+        <div style="grid-column: 1 / -1;">
+          <label class="form-label">Booking Confirmation Message</label>
+          <input type="text" class="form-control" value="Thank you for choosing SnapJoy! Your booking is confirmed and our team will contact you within 24 hours.">
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.8rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <button class="btn-primary">Save Changes</button>
+        <button class="btn-secondary">Reset to Default</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="dashboard-footer">
+    <p>© 2026 SNAPJOY — Photo Booth & Event Rentals. Admin Panel.</p>
+    <div style="margin-top:0.8rem;">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // ===== Theme Toggle (same as index.html) =====
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+  function toggleTheme() {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      updateThemeIcon(false);
+    } else {
+      body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      updateThemeIcon(true);
+    }
+  }
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+    updateThemeIcon(true);
+  } else {
+    updateThemeIcon(false);
+  }
+  themeToggle.addEventListener('click', toggleTheme);
+
+  // ===== RTL Toggle (same as index.html) =====
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() {
+    if (htmlEl.getAttribute('dir') === 'rtl') {
+      htmlEl.removeAttribute('dir');
+      localStorage.setItem('direction', 'ltr');
+    } else {
+      htmlEl.setAttribute('dir', 'rtl');
+      localStorage.setItem('direction', 'rtl');
+    }
+  }
+  rtlToggle.addEventListener('click', toggleRTL);
+  if (localStorage.getItem('direction') === 'rtl') {
+    htmlEl.setAttribute('dir', 'rtl');
+  }
+
+  // ===== Mobile sidebar toggle =====
+  const sidebarToggle = document.getElementById('mobile-sidebar-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('mobile-overlay');
+
+  function toggleMobile(open) {
+    sidebar.classList.toggle('show', open);
+    overlay.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  sidebarToggle?.addEventListener('click', () => toggleMobile(!sidebar.classList.contains('show')));
+  overlay?.addEventListener('click', () => toggleMobile(false));
+
+  // ===== Section navigation =====
+  const sections = ['overview', 'bookings', 'clients', 'events', 'invoices', 'staff', 'settings'];
+  const links = document.querySelectorAll('.sidebar-link');
+
+  window.activateSection = function (sectionId) {
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    const target = document.getElementById(sectionId);
+    if (target) target.style.display = 'block';
+
+    links.forEach(link => {
+      link.classList.remove('active');
+      if (link.dataset.section === sectionId) link.classList.add('active');
+    });
+
+    if (window.innerWidth < 1180) toggleMobile(false);
+  };
+
+  links.forEach(link => {
+    if (link.dataset.section) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        activateSection(link.dataset.section);
+      });
+    }
+  });
+
+  // ===== Logout =====
+  document.getElementById('logoutBtn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = 'login.html';
+  });
+</script>
+</body>
+</html>

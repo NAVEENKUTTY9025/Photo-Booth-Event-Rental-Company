@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>SnapJoy | Photo Booth & Event Rentals — Home 2</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23D4AF37'%3E%3Cpath d='M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z'/%3E%3C/svg%3E">
+  <meta name="description" content="SnapJoy photo booth rentals — luxury photo experiences for weddings, corporate events, and parties. 360 booths, mirror booths, and open-air setups.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base - Three Color System: Gallery White, Tuxedo Black, Champagne Gold */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F8F8;
+      --bg-card: #FFFFFF;
+      --bg-nav: #171717;
+      --text-primary: #171717;
+      --text-secondary: #2C2C2C;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #171717;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1A1A1A;
+      --bg-nav: #0A0A0A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #0A0A0A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Utility Classes */
+    .text-accent { color: var(--accent); }
+    .bg-accent { background: var(--accent); }
+    .btn-primary {
+      background: var(--accent);
+      color: #171717;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #B8962E;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #171717;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(23, 23, 23, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: fixed;
+      width: calc(100% - 40px);
+      top: 15px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .flex-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo-text {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--nav-text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin: 0 2rem;
+    }
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--nav-text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+      position: relative;
+    }
+    .dropdown-btn::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute;
+      left: -1rem;
+      margin-top: 1rem;
+      width: 220px;
+      background: rgba(23, 23, 23, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      transform: translateY(10px);
+      z-index: 60;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(212,175,55,0.1); color: var(--accent); }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #171717; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn {
+      background: var(--accent);
+      color: #171717;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+    }
+    .login-btn:hover { background: #B8962E; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    
+    @media (max-width: 1180px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(212,175,55,0.15);
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+    .hamburger-icon, .close-icon {
+      font-size: 1.8rem;
+      color: var(--nav-text);
+    }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+    
+    .mobile-menu-panel {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-nav);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-nav-link {
+      color: var(--nav-text);
+      text-decoration: none;
+      display: block;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(212,175,55,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover, .mobile-dropdown-btn.active { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.3);
+    }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a {
+      display: block;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
+    .mobile-login-btn {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: var(--accent);
+      color: #171717;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-theme-rtl {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(212,175,55,0.15);
+      flex-wrap: wrap;
+    }
+    .mobile-icon-btn {
+      background: rgba(212,175,55,0.15);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: var(--nav-text);
+      cursor: pointer;
+    }
+    .mobile-icon-btn:hover { background: var(--accent); color: #171717; }
+
+    /* Container & Sections */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 100px 0; border-bottom: 1px solid var(--border-color); }
+    .section-title {
+      font-size: 3rem;
+      font-family: 'Oswald', sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+    .accent-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem auto 2rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    /* SECTION 1: SPLIT HERO */
+    .split-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+    }
+    .split-hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .split-hero-image {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      animation: fadeInLeft 0.8s ease-out;
+      position: relative;
+    }
+    .split-hero-image img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+      display: block;
+    }
+    .split-hero-image::before {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      width: 150px;
+      height: 150px;
+      border: 3px solid var(--accent);
+      border-radius: 28px;
+      z-index: -1;
+    }
+    .split-hero-content {
+      animation: fadeInRight 0.8s ease-out;
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      color: var(--accent);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      font-family: 'Oswald', sans-serif;
+      border: 1px solid rgba(212,175,55,0.3);
+    }
+    @media (max-width: 992px) {
+      .split-hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .split-hero-image img { height: 400px; }
+    }
+
+    /* SECTION 2: BOOTH TYPES GRID */
+    .booth-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .booth-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      height: 420px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-color);
+    }
+    .booth-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+    .booth-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .booth-card:hover img {
+      transform: scale(1.08);
+    }
+    .booth-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      color: #FFFFFF;
+    }
+    .booth-overlay h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .booth-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    .booth-price {
+      display: inline-block;
+      background: var(--accent);
+      color: #171717;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* SECTION 3: FEATURED EVENT SHOWCASE */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+    .showcase-item {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+    .showcase-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .showcase-item:hover img {
+      transform: scale(1.05);
+    }
+    .showcase-tall {
+      grid-column: span 4;
+      grid-row: span 2;
+      height: 540px;
+    }
+    .showcase-wide {
+      grid-column: span 8;
+      height: 260px;
+    }
+    .showcase-small {
+      grid-column: span 4;
+      height: 260px;
+    }
+    .showcase-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: #FFFFFF;
+      transition: all 0.3s;
+    }
+    .showcase-item:hover .showcase-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(212,175,55,0.15) 100%);
+    }
+    .showcase-overlay h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+    @media (max-width: 1024px) {
+      .showcase-grid { grid-template-columns: repeat(6, 1fr); }
+      .showcase-tall { grid-column: span 6; height: 400px; }
+      .showcase-wide { grid-column: span 6; height: 240px; }
+      .showcase-small { grid-column: span 3; height: 200px; }
+    }
+    @media (max-width: 640px) {
+      .showcase-small { grid-column: span 6; height: 220px; }
+    }
+
+    /* SECTION 4: PACKAGES */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .package-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .package-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+    .package-card.featured {
+      border: 2px solid var(--accent);
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+    }
+    .package-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #171717;
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+    }
+    .package-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .package-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .package-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+    .package-price span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+    }
+    .package-duration {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .package-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .package-features li {
+      padding: 0.6rem 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .package-features li:last-child { border-bottom: none; }
+    .package-features li i {
+      color: var(--accent);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .package-card .btn-primary,
+    .package-card .btn-outline {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* SECTION 5: HOW IT WORKS (VERTICAL TIMELINE) */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border-color);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 50%;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    .timeline-item:nth-child(even) {
+      justify-content: flex-start;
+      padding-right: 0;
+      padding-left: 50%;
+    }
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.8rem;
+      max-width: 380px;
+      position: relative;
+      transition: all 0.3s;
+      margin-right: 40px;
+    }
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-right: 0;
+      margin-left: 40px;
+    }
+    .timeline-content:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-4px);
+    }
+    .timeline-number {
+      position: absolute;
+      top: 50%;
+      right: -60px;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #171717;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 0 0 6px var(--bg-primary);
+      z-index: 2;
+    }
+    .timeline-item:nth-child(even) .timeline-number {
+      right: auto;
+      left: -60px;
+    }
+    .timeline-content h3 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    .timeline-content p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .timeline-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .timeline::before { left: 20px; }
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-left: 60px;
+        padding-right: 0;
+      }
+      .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin: 0;
+        max-width: 100%;
+      }
+      .timeline-number,
+      .timeline-item:nth-child(even) .timeline-number {
+        left: -50px;
+        right: auto;
+      }
+    }
+
+    /* SECTION 6: NEWSLETTER + GALLERY STRIP */
+    .newsletter-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: var(--shadow);
+    }
+    .newsletter-image {
+      position: relative;
+      min-height: 480px;
+    }
+    .newsletter-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .newsletter-content {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .newsletter-content h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .newsletter-content p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .newsletter-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    .newsletter-success {
+      display: none;
+      margin-top: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .newsletter-success.show { display: block; }
+
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .gallery-strip img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-color);
+    }
+    .gallery-strip img:hover {
+      transform: scale(1.03);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 1024px) {
+      .booth-grid { grid-template-columns: repeat(2, 1fr); }
+      .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .newsletter-wrapper { grid-template-columns: 1fr; }
+      .newsletter-image { min-height: 300px; }
+      .newsletter-content { padding: 2.5rem; }
+      .gallery-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .booth-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 2rem; }
+      section { padding: 60px 0; }
+      .gallery-strip { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { min-width: 100%; }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      padding-top: 80px;
+      padding-bottom: 40px;
+      border-top: 1px solid rgba(212,175,55,0.2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--footer-text);
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo {
+      font-size: 1.6rem!important;
+      font-weight: 700 !important;
+      color: var(--footer-text) !important;
+      text-decoration: none !important;
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: var(--footer-text-muted);
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-contact-item a:hover { color: var(--accent); }
+    .footer-copyright {
+      border-top: 1px solid rgba(212,175,55,0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--footer-text-muted);
+      font-size: 0.8rem;
+    }
+    .footer-copyright a {
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: 0.2s;
+    }
+    .footer-copyright a:hover { color: var(--accent); }
+
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn active">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html" class="active">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn active">Home <i class="fas fa-chevron-down mobile-dropdown-icon rotated"></i></button>
+        <div class="mobile-submenu show"><a href="index.html">Home 1</a><a href="home2.html" class="active">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- SECTION 1: SPLIT HERO -->
+<section class="split-hero">
+  <div class="split-hero-container">
+    <div class="split-hero-image">
+      <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&auto=format&fit=crop" alt="Luxury mirror photo booth at an elegant event">
+    </div>
+    <div class="split-hero-content">
+      <span class="hero-tag">Premium Photo Experiences</span>
+      <h1 class="font-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom:1.5rem;">The Booth That<br><span class="text-accent">Steals the Show</span></h1>
+      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem;">From intimate weddings to grand corporate galas, our luxury photo booths deliver unforgettable moments with unmatched elegance and style.</p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+        <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Reserve Your Date</a>
+        <a href="service.html" class="btn-outline">Explore Booths <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div style="display:flex; gap:2rem; flex-wrap:wrap; padding-top:1.5rem; border-top:1px solid var(--border-color);">
+        <div>
+          <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">500+</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Events</div>
+        </div>
+        <div>
+          <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">4.9★</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Rating</div>
+        </div>
+        <div>
+          <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">7</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Years</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: BOOTH TYPES -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Choose Your <span class="text-accent">Booth</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">Three signature photo experiences, each designed to bring a unique kind of magic to your event.</p>
+    <div class="booth-grid">
+      <div class="booth-card">
+        <img src="images/h1.jpg" alt="Open Air Photo Booth">
+        <div class="booth-overlay">
+          <h3>Open Air Booth</h3>
+          <p>Spacious, modern, and group-friendly. Perfect for weddings and parties.</p>
+          <span class="booth-price">From $599</span>
+        </div>
+      </div>
+      <div class="booth-card">
+        <img src="images/h2.jpg" alt="Mirror Photo Booth">
+        <div class="booth-overlay">
+          <h3>Mirror Booth</h3>
+          <p>Elegant interactive mirror. Adds luxury and sophistication to any event.</p>
+          <span class="booth-price">From $749</span>
+        </div>
+      </div>
+      <div class="booth-card">
+        <img src="images/h3.jpg" alt="360 Video Booth">
+        <div class="booth-overlay">
+          <h3>360 Video Booth</h3>
+          <p>Stunning slow-motion 360 videos. The life of every modern party.</p>
+          <span class="booth-price">From $899</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: EVENT SHOWCASE -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Recent <span class="text-accent">Celebrations</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">A glimpse into the moments we've helped create — from intimate gatherings to grand galas.</p>
+    <div class="showcase-grid">
+      <div class="showcase-item showcase-tall">
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&auto=format&fit=crop" alt="Wedding reception photo booth">
+        <div class="showcase-overlay"><h4>Rooftop Wedding · Los Angeles</h4></div>
+      </div>
+      <div class="showcase-item showcase-wide">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1000&auto=format&fit=crop" alt="Corporate gala event">
+        <div class="showcase-overlay"><h4>Annual Corporate Gala · Beverly Hills</h4></div>
+      </div>
+      <div class="showcase-item showcase-small">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop" alt="Birthday party celebration">
+        <div class="showcase-overlay"><h4>Sweet 16 Party</h4></div>
+      </div>
+      <div class="showcase-item showcase-small">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop" alt="Music festival event">
+        <div class="showcase-overlay"><h4>Music Festival Activation</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: PACKAGES -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Simple, Transparent <span class="text-accent">Pricing</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">All packages include delivery, setup, an attendant, unlimited prints, and digital sharing.</p>
+    <div class="packages-grid">
+      
+      <div class="package-card">
+        <h3 class="package-name">Essential</h3>
+        <p class="package-desc">Perfect for intimate gatherings and smaller celebrations.</p>
+        <div class="package-price">$599<span>/event</span></div>
+        <div class="package-duration">3 hours of coverage</div>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Open Air Booth</li>
+          <li><i class="fas fa-check"></i> Unlimited photo prints</li>
+          <li><i class="fas fa-check"></i> Digital sharing (QR)</li>
+          <li><i class="fas fa-check"></i> Standard prop collection</li>
+          <li><i class="fas fa-check"></i> Professional attendant</li>
+        </ul>
+        <a href="contact.html" class="btn-outline">Book Essential</a>
+      </div>
+
+      <div class="package-card featured">
+        <span class="package-badge">Most Popular</span>
+        <h3 class="package-name">Signature</h3>
+        <p class="package-desc">Our most-loved package for weddings and milestone events.</p>
+        <div class="package-price">$899<span>/event</span></div>
+        <div class="package-duration">4 hours of coverage</div>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Choice of Mirror or Open Air Booth</li>
+          <li><i class="fas fa-check"></i> Unlimited premium prints</li>
+          <li><i class="fas fa-check"></i> Custom photo template & branding</li>
+          <li><i class="fas fa-check"></i> Premium prop collection</li>
+          <li><i class="fas fa-check"></i> Custom backdrop included</li>
+          <li><i class="fas fa-check"></i> Online gallery (48 hours)</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Book Signature</a>
+      </div>
+
+      <div class="package-card">
+        <h3 class="package-name">Luxury 360</h3>
+        <p class="package-desc">The ultimate party experience with our 360 video booth.</p>
+        <div class="package-price">$1,299<span>/event</span></div>
+        <div class="package-duration">5 hours of coverage</div>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> 360 Video Booth</li>
+          <li><i class="fas fa-check"></i> Slow-motion videos + prints</li>
+          <li><i class="fas fa-check"></i> Social media sharing station</li>
+          <li><i class="fas fa-check"></i> LED backdrop & uplighting</li>
+          <li><i class="fas fa-check"></i> Custom branded overlays</li>
+          <li><i class="fas fa-check"></i> Two attendants on-site</li>
+        </ul>
+        <a href="contact.html" class="btn-outline">Book Luxury 360</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: HOW IT WORKS (TIMELINE) -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Booking Made <span class="text-accent">Effortless</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">Four simple steps from "yes!" to unforgettable memories.</p>
+    
+    <div class="timeline">
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <img src="https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=600&auto=format&fit=crop" alt="Couple booking photo booth online" class="timeline-img">
+          <h3>1. Choose & Reserve</h3>
+          <p>Select your booth and package online, or give us a call. A 30% deposit locks in your date.</p>
+          <div class="timeline-number">01</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&auto=format&fit=crop" alt="Customizing photo template and backdrop" class="timeline-img">
+          <h3>2. Customize Your Experience</h3>
+          <p>Work with our design team on your photo template, backdrop, and branded overlays.</p>
+          <div class="timeline-number">02</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&auto=format&fit=crop" alt="Photo booth delivery and setup at venue" class="timeline-img">
+          <h3>3. We Arrive & Set Up</h3>
+          <p>Our team arrives 90 minutes early to set up and test everything before your guests arrive.</p>
+          <div class="timeline-number">03</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&auto=format&fit=crop" alt="Guests celebrating with photo booth" class="timeline-img">
+          <h3>4. You Celebrate, We Capture</h3>
+          <p>Guests snap, print, and share while we handle everything. Your full gallery arrives in 48 hours.</p>
+          <div class="timeline-number">04</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: NEWSLETTER + GALLERY STRIP -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="newsletter-wrapper">
+      <div class="newsletter-image">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&auto=format&fit=crop" alt="Elegant event photo booth setup">
+      </div>
+      <div class="newsletter-content">
+        <span class="hero-tag" style="margin-bottom:1rem;">Stay Inspired</span>
+        <h2>Get <span class="text-accent">10% Off</span> Your First Booking</h2>
+        <p>Join our newsletter for event inspiration, seasonal offers, and exclusive photo booth tips. New subscribers receive 10% off their first booking.</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Enter your email address" required>
+          <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Subscribe</button>
+        </form>
+        <p class="newsletter-success" id="newsletter-success"><i class="fas fa-check-circle"></i> You're in! Check your inbox for your discount code.</p>
+      </div>
+    </div>
+
+    <div class="gallery-strip">
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop" alt="Party photo booth moment">
+      <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop" alt="Festival photo booth">
+      <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop" alt="Corporate event photo booth">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop" alt="Wedding photo booth">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a><p>Premium photo booth and event rentals. Creating memories with style and elegance.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="#">Open Air Booth</a><a href="#">Mirror Booth</a><a href="#">360 Video Booth</a><a href="#">Custom Backdrops</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Book Now</a><a href="#">Packages & Pricing</a><a href="#">FAQ</a><a href="#">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885557627">+1 (888) 555-7627</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:hello@snapjoy.com">hello@snapjoy.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 SnapJoy — Photo Booth & Event Rentals. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if(body.classList.contains('dark')) { body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false); }
+    else { body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true); }
+  }
+  if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+  
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() { if(htmlEl.getAttribute('dir') === 'rtl') { htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr'); } else { htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl'); } }
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if(localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+  
+  // Mobile Menu
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() { mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active'); document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : ''; }
+  if(mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => { link.addEventListener('click', () => { if(mobilePanel.classList.contains('show')) toggleMobile(); }); });
+  
+  // Mobile Dropdowns
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if(menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if(i !== icon) i.classList.remove('rotated'); });
+      if(submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+  
+  // Newsletter Form
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterSuccess = document.getElementById('newsletter-success');
+  if(newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      newsletterSuccess.classList.add('show');
+      newsletterForm.reset();
+      setTimeout(() => { newsletterSuccess.classList.remove('show'); }, 5000);
+    });
+  }
+  
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const target = document.querySelector(targetId);
+      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); if(mobilePanel?.classList.contains('show')) toggleMobile(); }
+    });
+  });
+  window.addEventListener('resize', () => { if(window.innerWidth > 1180 && mobilePanel?.classList.contains('show')) toggleMobile(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blog | SnapJoy Photo Booth & Event Rentals</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23D4AF37'%3E%3Cpath d='M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z'/%3E%3C/svg%3E">
+  <meta name="description" content="Event inspiration, photo booth tips, and celebration ideas from the SnapJoy team.">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SnapJoy three-color system --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F8F8;
+      --bg-card: #FFFFFF;
+      --bg-nav: #171717;
+      --text-primary: #171717;
+      --text-secondary: #2C2C2C;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #171717;
+    }
+    body.dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #141414;
+      --bg-card: #1A1A1A;
+      --bg-nav: #0A0A0A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #D4AF37;
+      --accent-dark: #B8962E;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #0A0A0A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading { font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+
+    .text-accent { color: var(--accent); }
+    .btn-primary {
+      background: var(--accent); color: #171717; font-weight: 700;
+      padding: 0.9rem 2rem; border-radius: 40px;
+      transition: all 0.3s ease; display: inline-flex; align-items: center;
+      gap: 10px; border: none; text-transform: uppercase; letter-spacing: 1px;
+      font-size: 0.85rem; cursor: pointer; text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark); transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    }
+    .btn-outline {
+      background: transparent; border: 2px solid var(--accent);
+      color: var(--accent); padding: 0.8rem 1.8rem; border-radius: 40px;
+      transition: all 0.3s ease; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent); color: #171717;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    }
+
+    /* NAVBAR (exact same as index.html) */
+    .navbar {
+      background: rgba(23, 23, 23, 0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      position: fixed; width: calc(100% - 40px); top: 15px; left: 20px;
+      z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(212,175,55,0.15); border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+    .flex-nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+    .nav-logo-text {
+      font-size: 1.6rem !important; font-weight: 700 !important;
+      color: var(--nav-text); text-decoration: none;
+      letter-spacing: -0.5px; display: inline-block;
+      line-height: 1; font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu-container { display: flex; align-items: center; justify-content: center; flex: 1; margin: 0 2rem; }
+    .nav-links-group { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-link {
+      color: var(--nav-text); font-weight: 500; transition: color 0.3s;
+      padding: 0.5rem 0; font-size: 0.95rem; text-decoration: none;
+      white-space: nowrap; position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; left: 0; }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+
+    .dropdown-container { position: relative; display: inline-block; }
+    .dropdown-btn {
+      background: none; border: none; color: var(--nav-text);
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+      padding: 0.5rem 0; cursor: pointer; font-size: 0.95rem;
+      transition: all 0.3s; white-space: nowrap; position: relative;
+    }
+    .dropdown-btn::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: 0; left: 50%; background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after { width: 100%; left: 0; }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute; left: -1rem; margin-top: 1rem; width: 220px;
+      background: rgba(23, 23, 23, 0.96); backdrop-filter: blur(12px);
+      border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+      transform: translateY(10px); z-index: 60;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-menu a {
+      display: block; padding: 0.8rem 1.5rem; color: #FFFFFF;
+      text-decoration: none; font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(212,175,55,0.1); color: var(--accent); }
+
+    .nav-buttons { display: flex; align-items: center; gap: 0.75rem; }
+    .icon-btn {
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.05); display: flex;
+      align-items: center; justify-content: center; cursor: pointer;
+      transition: 0.3s; color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover {
+      background: var(--accent); color: #171717;
+      border-color: var(--accent); transform: translateY(-2px);
+    }
+    .login-btn {
+      background: var(--accent); color: #171717; padding: 0.6rem 1.5rem;
+      border-radius: 999px; font-weight: 700; text-decoration: none;
+      font-size: 0.85rem; transition: 0.3s; white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+    }
+    .login-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+    .login-btn-secondary {
+      background: transparent; color: var(--nav-text); padding: 0.6rem 1.5rem;
+      border-radius: 999px; font-weight: 700; text-decoration: none;
+      font-size: 0.85rem; transition: 0.3s; white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    @media (max-width: 1180px) {
+      .navbar { width: 100%; top: 0; left: 0; border-radius: 0; border: none; border-bottom: 1px solid rgba(212,175,55,0.15); }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 10px; z-index: 1001;
+    }
+    .hamburger-icon, .close-icon { font-size: 1.8rem; color: var(--nav-text); }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+
+    .mobile-menu-panel {
+      position: fixed; top: 80px; left: 0; right: 0;
+      background: var(--bg-nav); max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease-out; z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-nav-link { color: var(--nav-text); text-decoration: none; display: block; padding: 1rem 1.5rem; font-weight: 500; }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(212,175,55,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%; background: none; border: none; color: var(--nav-text);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.5rem; font-size: 1rem; text-align: left;
+      cursor: pointer; font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover, .mobile-dropdown-btn.active { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: rgba(0,0,0,0.3); }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a { display: block; padding: 0.75rem 1rem 0.75rem 2.5rem; color: var(--nav-text); text-decoration: none; opacity: 0.8; font-size: 0.9rem; }
+    .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
+    .mobile-login-btn { display: inline-block; margin: 1rem 1.5rem; background: var(--accent); color: #171717; padding: 0.75rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; text-align: center; }
+    .mobile-login-btn-secondary { display: inline-block; margin: 1rem 1.5rem; background: transparent; color: var(--nav-text); padding: 0.75rem 1.5rem; border-radius: 999px; border: 2px solid rgba(255,255,255,0.2); text-decoration: none; font-weight: 700; text-align: center; }
+    .mobile-theme-rtl { display: flex; gap: 1rem; padding: 1rem 1.5rem; border-top: 1px solid rgba(212,175,55,0.15); flex-wrap: wrap; }
+    .mobile-icon-btn { background: rgba(212,175,55,0.15); border: none; padding: 0.6rem 1rem; border-radius: 999px; color: var(--nav-text); cursor: pointer; }
+    .mobile-icon-btn:hover { background: var(--accent); color: #171717; }
+
+    /* Page Header */
+    .page-header {
+      padding: 180px 0 100px; background: var(--bg-secondary);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-family: 'Oswald', sans-serif; margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .page-header p { color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 100px 0; border-bottom: 1px solid var(--border-color); }
+    .section-title {
+      font-size: 3rem; font-family: 'Oswald', sans-serif;
+      text-align: center; margin-bottom: 1rem;
+      color: var(--text-primary); letter-spacing: 1px;
+    }
+    .accent-divider { width: 80px; height: 3px; background: var(--accent); margin: 0.8rem auto 2rem; }
+    .section-sub { text-align: center; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem; }
+
+    /* Featured Post */
+    .featured-post {
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 3rem; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 28px; overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .featured-image {
+      height: 100%; min-height: 420px; overflow: hidden;
+    }
+    .featured-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform 0.6s ease;
+    }
+    .featured-post:hover .featured-image img { transform: scale(1.05); }
+    .featured-content { padding: 2.5rem; }
+    .post-category {
+      display: inline-block; background: rgba(212,175,55,0.15);
+      color: var(--accent); padding: 0.35rem 1rem;
+      border-radius: 999px; font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    .featured-content h2 {
+      font-family: 'Oswald', sans-serif; font-size: 2rem;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .featured-content p {
+      color: var(--text-secondary); margin-bottom: 1.5rem;
+      line-height: 1.7; font-size: 1rem;
+    }
+    .post-meta {
+      display: flex; align-items: center; gap: 1.2rem;
+      color: var(--text-muted); font-size: 0.82rem;
+      margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .post-meta span { display: flex; align-items: center; gap: 0.4rem; }
+    .post-meta i { color: var(--accent); }
+    .post-author {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-top: 1rem;
+    }
+    .post-author-avatar {
+      width: 40px; height: 40px; border-radius: 999px;
+      background: linear-gradient(135deg, #D4AF37 0%, #8B6F1E 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #FFFFFF; font-weight: 700; font-size: 0.85rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    .post-author-info p { font-weight: 600; font-size: 0.85rem; }
+    .post-author-info span { color: var(--text-muted); font-size: 0.75rem; }
+
+    @media (max-width: 992px) {
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-image { min-height: 280px; }
+      .featured-content { padding: 2rem; }
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .blog-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 24px; overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+    }
+    .blog-card:hover {
+      border-color: var(--accent); transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .blog-card-image {
+      height: 220px; overflow: hidden; position: relative;
+    }
+    .blog-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform 0.6s ease;
+    }
+    .blog-card:hover .blog-card-image img { transform: scale(1.08); }
+    .blog-card-category {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--accent); color: #171717;
+      padding: 0.3rem 0.9rem; border-radius: 999px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+    }
+    .blog-card-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-meta {
+      display: flex; gap: 1rem; color: var(--text-muted);
+      font-size: 0.75rem; margin-bottom: 0.8rem;
+    }
+    .blog-card-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .blog-card-meta i { color: var(--accent); font-size: 0.75rem; }
+    .blog-card-body h3 {
+      font-family: 'Oswald', sans-serif; font-size: 1.2rem;
+      margin-bottom: 0.7rem; line-height: 1.3;
+    }
+    .blog-card-body p {
+      color: var(--text-secondary); font-size: 0.88rem;
+      line-height: 1.6; margin-bottom: 1.2rem; flex: 1;
+    }
+    .read-more {
+      color: var(--accent); font-weight: 700; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: gap 0.3s;
+      text-decoration: none;
+    }
+    .blog-card:hover .read-more { gap: 0.7rem; }
+
+    @media (max-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Category Pills */
+    .category-pills {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 0.7rem; margin-bottom: 3rem;
+    }
+    .category-pill {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      color: var(--text-secondary); padding: 0.6rem 1.4rem;
+      border-radius: 999px; font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+    .category-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .category-pill.active {
+      background: var(--accent); color: #171717;
+      border-color: var(--accent);
+      box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    }
+
+    /* Newsletter */
+    .newsletter-wrap {
+      background: var(--bg-secondary); border: 1px solid var(--accent);
+      border-radius: 28px; padding: 3rem 2rem; text-align: center;
+    }
+    .newsletter-wrap h3 {
+      font-family: 'Oswald', sans-serif; font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .newsletter-wrap p {
+      color: var(--text-secondary); max-width: 550px;
+      margin: 0 auto 2rem;
+    }
+    .newsletter-form {
+      display: flex; gap: 0.8rem; max-width: 500px;
+      margin: 0 auto; flex-wrap: wrap;
+    }
+    .newsletter-form input {
+      flex: 1; min-width: 200px;
+      padding: 0.9rem 1.2rem; border: 1px solid var(--border-color);
+      border-radius: 999px; background: var(--bg-card);
+      color: var(--text-primary); font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; transition: all 0.3s;
+    }
+    .newsletter-form input:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    .newsletter-success {
+      display: none; margin-top: 1rem;
+      color: var(--accent); font-weight: 600; font-size: 0.9rem;
+    }
+    .newsletter-success.show { display: block; }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg); padding-top: 80px;
+      padding-bottom: 40px; border-top: 1px solid rgba(212,175,55,0.2);
+    }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem; }
+    .footer-col h4 { font-size: 1.2rem; margin-bottom: 1.2rem; font-weight: 700; color: var(--footer-text); font-family: 'Oswald', sans-serif; }
+    .footer-col a { display: block; color: var(--footer-text-muted); text-decoration: none; margin-bottom: 0.6rem; transition: 0.2s; font-size: 0.85rem; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo { font-size: 1.6rem!important; font-weight: 700 !important; color: var(--footer-text) !important; text-decoration: none !important; font-family: 'Oswald', sans-serif; display: inline-block; margin-bottom: 1rem; }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a { display: inline-block; margin-right: 1rem; font-size: 1.2rem; color: var(--footer-text-muted); transition: 0.2s; }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-contact-item a:hover { color: var(--accent); }
+    .footer-copyright {
+      border-top: 1px solid rgba(212,175,55,0.2); padding-top: 2rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: 1rem; color: var(--footer-text-muted); font-size: 0.8rem;
+    }
+    .footer-copyright a { color: var(--footer-text-muted); text-decoration: none; margin-left: 1rem; transition: 0.2s; }
+    .footer-copyright a:hover { color: var(--accent); }
+
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-title { font-size: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 2rem; }
+      section { padding: 60px 0; }
+      .page-header { padding: 140px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR (exact same as index.html) -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link active">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link active">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <h1 class="font-heading">Our <span class="text-accent">Blog</span></h1>
+    <p>Event inspiration, photo booth tips, and celebration ideas to help you plan the perfect moment.</p>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Featured <span class="text-accent">Article</span></h2>
+    <div class="accent-divider"></div>
+
+    <article class="featured-post">
+      <div class="featured-image">
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&auto=format&fit=crop" alt="Wedding reception with photo booth">
+      </div>
+      <div class="featured-content">
+        <span class="post-category">Wedding Tips</span>
+        <h2 class="font-heading">10 Ways to Make Your Wedding Photo Booth Unforgettable</h2>
+        <p>From custom monogram templates to a curated prop collection, discover how to turn your wedding photo booth into the highlight of your reception. We share insider tips from 500+ weddings we've had the honor of capturing.</p>
+        <div class="post-meta">
+          <span><i class="fas fa-calendar"></i> Oct 2, 2026</span>
+          <span><i class="fas fa-clock"></i> 6 min read</span>
+          <span><i class="fas fa-comments"></i> 24 comments</span>
+        </div>
+        <div class="post-author">
+          <div class="post-author-avatar">MC</div>
+          <div class="post-author-info">
+            <p>Maya Chen</p>
+            <span>Creative Director</span>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="#" class="btn-primary">Read Article <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BLOG GRID -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Latest <span class="text-accent">Stories</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">Fresh ideas, real events, and expert advice from the SnapJoy team.</p>
+
+    <!-- Category Pills -->
+    <div class="category-pills">
+      <button class="category-pill active">All Posts</button>
+      <button class="category-pill">Wedding Tips</button>
+      <button class="category-pill">Corporate Events</button>
+      <button class="category-pill">Party Ideas</button>
+      <button class="category-pill">Booth Trends</button>
+      <button class="category-pill">Behind the Scenes</button>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid">
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Party Ideas</span>
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&auto=format&fit=crop" alt="Birthday party photo booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 28, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min</span>
+          </div>
+          <h3>7 Creative Photo Booth Themes for Sweet 16 Parties</h3>
+          <p>From neon glow to Hollywood glam, here are seven themes that will make your teen's birthday celebration truly memorable.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Corporate Events</span>
+          <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop" alt="Corporate gala photo booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 24, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min</span>
+          </div>
+          <h3>How to Use a Photo Booth for Lead Generation at Trade Shows</h3>
+          <p>Turn your trade show booth into a lead-generating machine with branded photo experiences and smart data capture.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Booth Trends</span>
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop" alt="360 video booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 20, 2026</span>
+            <span><i class="fas fa-clock"></i> 3 min</span>
+          </div>
+          <h3>Why the 360 Video Booth Is Taking Over 2026 Events</h3>
+          <p>Slow-motion videos, instant sharing, and unmatched guest engagement — discover why the 360 booth is the must-have.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Wedding Tips</span>
+          <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&auto=format&fit=crop" alt="Wedding mirror booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 15, 2026</span>
+            <span><i class="fas fa-clock"></i> 7 min</span>
+          </div>
+          <h3>Mirror Booth vs Open Air Booth: Which Is Right for Your Wedding?</h3>
+          <p>A side-by-side comparison of our two most popular wedding booths to help you make the perfect choice.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Behind the Scenes</span>
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&auto=format&fit=crop" alt="Festival photo booth setup">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 10, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min</span>
+          </div>
+          <h3>A Day in the Life of a SnapJoy Event Technician</h3>
+          <p>From loading the van at 6 AM to the final photo at midnight — what it really takes to run a flawless event.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Party Ideas</span>
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&auto=format&fit=crop" alt="Custom backdrop photo booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Sep 5, 2026</span>
+            <span><i class="fas fa-clock"></i> 5 min</span>
+          </div>
+          <h3>Backdrop Trends 2026: Sequin, Floral, and Beyond</h3>
+          <p>The most-requested backdrops this year and how to match one to your event's color palette and mood.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Corporate Events</span>
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&auto=format&fit=crop" alt="Corporate gala setup">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Aug 30, 2026</span>
+            <span><i class="fas fa-clock"></i> 6 min</span>
+          </div>
+          <h3>Planning a Corporate Gala? Here's Your Photo Booth Checklist</h3>
+          <p>Everything you need to consider when adding a photo experience to your next corporate gala or awards night.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Booth Trends</span>
+          <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&auto=format&fit=crop" alt="Open air booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Aug 25, 2026</span>
+            <span><i class="fas fa-clock"></i> 3 min</span>
+          </div>
+          <h3>5 Photo Booth Props That Always Get a Laugh</h3>
+          <p>Our most-loved props across 500+ events — and why they never fail to bring out the best smiles.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <span class="blog-card-category">Behind the Scenes</span>
+          <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop" alt="Event photo booth">
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i> Aug 20, 2026</span>
+            <span><i class="fas fa-clock"></i> 4 min</span>
+          </div>
+          <h3>How We Customize Every Photo Template for Your Event</h3>
+          <p>Our design process — from your first inspiration board to the final printed photo — revealed.</p>
+          <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section>
+  <div class="container">
+    <div class="newsletter-wrap">
+      <h3 class="font-heading">Never Miss a <span class="text-accent">Story</span></h3>
+      <p>Join our newsletter for event inspiration, seasonal offers, and exclusive photo booth tips delivered monthly.</p>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Subscribe</button>
+      </form>
+      <p class="newsletter-success" id="newsletter-success"><i class="fas fa-check-circle"></i> You're subscribed! Check your inbox for a welcome gift.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a><p>Premium photo booth and event rentals. Creating memories with style and elegance.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="service-details.html?service=open-air">Open Air Booth</a><a href="service-details.html?service=mirror">Mirror Booth</a><a href="service-details.html?service=360">360 Video Booth</a><a href="service-details.html?service=backdrops">Custom Backdrops</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="contact.html">Book Now</a><a href="service.html">Packages & Pricing</a><a href="faq.html">FAQ</a><a href="blog.html">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885557627">+1 (888) 555-7627</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:hello@snapjoy.com">hello@snapjoy.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 SnapJoy — Photo Booth & Event Rentals. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // ===== Theme Toggle (same as index.html) =====
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false);
+    } else {
+      body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true);
+    }
+  }
+  if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+
+  // ===== RTL Toggle (same as index.html) =====
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() {
+    if (htmlEl.getAttribute('dir') === 'rtl') {
+      htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr');
+    } else {
+      htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl');
+    }
+  }
+  if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if (localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+
+  // ===== Mobile Menu (same as index.html) =====
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() {
+    mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active');
+    document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : '';
+  }
+  if (mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => {
+    link.addEventListener('click', () => { if (mobilePanel.classList.contains('show')) toggleMobile(); });
+  });
+
+  // ===== Mobile Dropdowns (same as index.html) =====
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if (menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if (i !== icon) i.classList.remove('rotated'); });
+      if (submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+
+  // ===== Category Pill Filter =====
+  const pills = document.querySelectorAll('.category-pill');
+  pills.forEach(pill => {
+    pill.addEventListener('click', function () {
+      pills.forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ===== Newsletter Form =====
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterSuccess = document.getElementById('newsletter-success');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      newsletterSuccess.classList.add('show');
+      newsletterForm.reset();
+      setTimeout(() => { newsletterSuccess.classList.remove('show'); }, 5000);
+    });
+  }
+
+  // ===== Smooth Scroll =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' });
+        if (mobilePanel?.classList.contains('show')) toggleMobile();
+      }
+    });
+  });
+</script>
+</body>
+</html>
