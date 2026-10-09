@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>404 Error - SnapJoy</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Theme matching index.html */
+    :root {
+      --bg-primary: #171717;       /* Tuxedo Black for a premium look */
+      --text-primary: #FFFFFF;
+      --text-secondary: #CCCCCC;
+      --accent: #D4AF37;           /* Champagne Gold */
+      --accent-dark: #B8962E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden; /* Prevents scrolling */
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Background glow effect for premium feel */
+    .glow-bg {
+      position: absolute;
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, rgba(23,23,23,0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+      z-index: 1;
+      animation: fadeIn 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    .error-code {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .error-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .error-message {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 400;
+      margin-bottom: 3rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #171717;
+      font-weight: 700;
+      padding: 0.9rem 2.5rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(212,175,55,0.3);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .icon-camera {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+      50% { transform: translateY(-15px); text-shadow: 0 25px 40px rgba(212, 175, 55, 0.4); }
+      100% { transform: translateY(0px); text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-bg"></div>
+  <div class="container">
+    <i class="fa-solid fa-camera-retro icon-camera"></i>
+    <div class="error-code">404</div>
+    <div class="error-title">Page Not Found</div>
+    <div class="error-message">Oops! It looks like this page stepped out of the photo booth. Let's get you back to capturing memories.</div>
+    <a href="index.html" class="btn-primary"><i class="fas fa-home"></i> Back to Home</a>
+  </div>
+</body>
+</html>
