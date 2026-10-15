@@ -533,43 +533,87 @@
     }
     .dashboard-footer a:hover { color: var(--accent); }
 
-    /* Mobile toggle for sidebar */
+    /* Mobile toggle for sidebar - positioned in top bar near theme toggle */
     .mobile-sidebar-toggle {
       display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
+      font-size: 1rem;
+    }
+    .mobile-sidebar-toggle.active {
       background: var(--accent);
       color: #171717;
-      border: none;
-      cursor: pointer;
-      z-index: 950;
-      box-shadow: 0 10px 25px rgba(212,175,55,0.4);
-      font-size: 1.3rem;
-      transition: all 0.3s;
+      border-color: var(--accent);
     }
-    .mobile-sidebar-toggle:hover {
-      background: var(--accent-dark);
-      transform: translateY(-2px);
+
+    .sidebar-header-mobile {
+      display: none;
     }
-    html[dir="rtl"] .mobile-sidebar-toggle { right: auto; left: 20px; }
 
     #mobile-overlay {
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
       position: fixed;
       inset: 0;
-      z-index: 850;
+      z-index: 1040;
     }
     #mobile-overlay.active { opacity: 1; pointer-events: auto; }
 
-    /* Responsive */
+    /* Responsive dashboard grids */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 1.2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 1.2rem;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .table-responsive::-webkit-scrollbar {
+      height: 6px;
+    }
+    .table-responsive::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 10px;
+    }
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+    .table-responsive table {
+      min-width: 650px;
+    }
+
+    /* Tablet & Mobile responsive (<= 1180px) */
     @media (max-width: 1180px) {
       .top-bar {
         width: 100%;
@@ -582,38 +626,140 @@
       .top-bar-container { height: 70px; }
       .user-info { display: none; }
 
+      .mobile-sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-header-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 0.8rem;
+        margin-bottom: 0.8rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .sidebar-title-desktop { display: none; }
+
       .sidebar {
         top: 70px;
         left: 0;
-        right: 0;
-        width: 100%;
-        max-height: 0;
-        border-radius: 0;
+        width: 280px;
+        max-width: 85vw;
+        height: calc(100vh - 70px);
+        max-height: calc(100vh - 70px);
+        border-radius: 0 20px 20px 0;
         border: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding 0.3s ease;
+        border-right: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color);
+        padding: 1.2rem;
+        overflow-y: auto;
+        z-index: 1050;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+        visibility: hidden;
+        box-shadow: none;
       }
       .sidebar.show {
-        max-height: calc(100vh - 70px);
-        overflow-y: auto;
-        padding: 1.5rem 1.2rem;
+        transform: translateX(0);
+        visibility: visible;
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.3);
+      }
+
+      html[dir="rtl"] .sidebar {
+        left: auto;
+        right: 0;
+        border-radius: 20px 0 0 20px;
+        border-right: none;
+        border-left: 1px solid var(--border-color);
+        transform: translateX(100%);
+      }
+      html[dir="rtl"] .sidebar.show {
+        transform: translateX(0);
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.3);
+      }
+
+      #mobile-overlay {
+        top: 70px;
       }
 
       .main-content {
-        margin-left: 0;
-        margin-right: 0;
-        padding: 95px 1rem 2rem 1rem;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 95px 1.5rem 2rem 1.5rem;
       }
-      html[dir="rtl"] .main-content { margin-right: 0; }
+      html[dir="rtl"] .main-content { margin-right: 0 !important; }
 
-      .mobile-sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+      }
+      .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+      }
     }
+
+    /* Tablet breakpoint (<= 992px) */
+    @media (max-width: 992px) {
+      .analytics-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    /* Mobile breakpoint (<= 768px) */
     @media (max-width: 768px) {
       .page-title { font-size: 1.5rem; }
+      .page-sub { font-size: 0.88rem; margin-bottom: 1.5rem; }
       .stat-value { font-size: 1.6rem; }
-      .dashboard-card { padding: 1.2rem; }
+      .dashboard-card { padding: 1.2rem; border-radius: 18px; }
+      .main-content { padding: 90px 1rem 2rem 1rem; }
+    }
+
+    /* Small mobile breakpoint (<= 480px) */
+    @media (max-width: 480px) {
+      .top-bar-container { padding: 0 0.8rem; }
+      .nav-logo-text { font-size: 1.25rem; }
+      .nav-logo-text i { font-size: 1.2rem; }
+      .top-bar-right { gap: 0.4rem; }
+      .icon-btn { width: 36px; height: 36px; font-size: 0.85rem; }
+      .user-chip { padding-left: 0.4rem; margin-left: 0.2rem; }
+      .user-avatar { width: 34px; height: 34px; font-size: 0.8rem; }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+      .action-tile {
+        padding: 1.1rem 0.75rem;
+        border-radius: 16px;
+      }
+      .action-tile .action-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+      }
+      .action-tile h3 {
+        font-size: 0.92rem;
+      }
+      .action-tile p {
+        font-size: 0.72rem;
+      }
+
+      .bar-chart {
+        gap: 0.35rem;
+        height: 150px;
+      }
+      .bar-label, .bar-value {
+        font-size: 0.65rem;
+      }
     }
   </style>
 </head>
@@ -629,6 +775,9 @@
     <div class="top-bar-right">
       <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
       <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      <button id="mobile-sidebar-toggle" class="icon-btn mobile-sidebar-toggle" title="Menu" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
       <div class="user-chip">
         <div class="user-avatar">AD</div>
         <div class="user-info">
@@ -640,15 +789,20 @@
   </div>
 </div>
 
-<!-- Mobile sidebar toggle button -->
-<button id="mobile-sidebar-toggle" class="mobile-sidebar-toggle" title="Menu">
-  <i class="fas fa-bars"></i>
-</button>
 <div id="mobile-overlay"></div>
 
 <!-- SIDEBAR -->
 <aside id="sidebar" class="sidebar">
-  <p class="sidebar-title">Admin Panel</p>
+  <div class="sidebar-header-mobile">
+    <div style="display:flex; align-items:center; gap:0.5rem;">
+      <i class="fa-solid fa-camera-retro" style="color:var(--accent); font-size:1.1rem;"></i>
+      <span class="font-heading" style="font-size:1.1rem; color:var(--text-primary); font-weight:700;">ADMIN <span class="text-accent">PANEL</span></span>
+    </div>
+    <button id="sidebar-close-btn" class="icon-btn" title="Close menu" aria-label="Close menu" style="width:34px; height:34px;">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <p class="sidebar-title sidebar-title-desktop">Admin Panel</p>
 
   <a href="#" data-section="overview" class="sidebar-link active">
     <i class="fas fa-gauge-high"></i>
@@ -702,7 +856,7 @@
     <h1 class="page-title">Admin Dashboard</h1>
     <p class="page-sub">Welcome back, Alex. Here's what's happening across SnapJoy today.</p>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+    <div class="stats-grid">
       <div class="dashboard-card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div>
@@ -749,7 +903,7 @@
     </div>
 
     <!-- Quick Actions -->
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+    <div class="quick-actions-grid">
       <a href="#bookings" onclick="activateSection('bookings'); return false;" class="action-tile">
         <div class="action-icon"><i class="fas fa-plus"></i></div>
         <h3>New Booking</h3>
@@ -776,7 +930,7 @@
     </div>
 
     <!-- Revenue chart + Recent activity -->
-    <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+    <div class="analytics-grid">
       <div class="dashboard-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
           <h3 class="font-heading" style="font-size:1.3rem;">Revenue (Last 6 Months)</h3>
@@ -843,7 +997,7 @@
         <h3 class="font-heading" style="font-size:1.3rem;">Recent Bookings</h3>
         <button class="text-accent" style="background:none; border:none; font-weight:700; font-size:0.85rem; cursor:pointer;">View All</button>
       </div>
-      <div style="overflow-x:auto;">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr>
@@ -920,7 +1074,7 @@
         <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-download"></i> Export</button>
       </div>
 
-      <div style="overflow-x:auto;">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr>
@@ -980,7 +1134,7 @@
         <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-search"></i> Search</button>
       </div>
 
-      <div style="overflow-x:auto;">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr><th>Client</th><th>Email</th><th>Phone</th><th>Bookings</th><th>Total Spent</th><th>Status</th><th>Actions</th></tr>
@@ -1043,7 +1197,7 @@
       <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:0.3rem;"><span class="text-accent">📅</span> Event Calendar</h2>
       <p class="text-secondary-text" style="margin-bottom:1.5rem; font-size:0.92rem;">Upcoming events and assigned booth setups.</p>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.2rem;">
+      <div class="calendar-grid">
         <div class="dashboard-card" style="padding:1.3rem; border-left:4px solid var(--accent);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
             <span class="badge-success" style="padding:0.2rem 0.7rem; border-radius:999px; font-size:0.7rem;">Confirmed</span>
@@ -1098,7 +1252,7 @@
         <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-download"></i> Export</button>
       </div>
 
-      <div style="overflow-x:auto;">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr><th>Invoice #</th><th>Client</th><th>Ref</th><th>Date</th><th>Due</th><th>Total</th><th>Status</th><th>Actions</th></tr>
@@ -1149,7 +1303,7 @@
         <button class="btn-secondary" style="padding:0.6rem 1.3rem; font-size:0.75rem;"><i class="fas fa-calendar"></i> Schedule</button>
       </div>
 
-      <div style="overflow-x:auto;">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr><th>Name</th><th>Role</th><th>Email</th><th>Phone</th><th>Events</th><th>Status</th><th>Actions</th></tr>
@@ -1202,7 +1356,7 @@
     <div class="dashboard-card">
       <h2 class="font-heading" style="font-size:1.6rem; margin-bottom:1.5rem;"><span class="text-accent">⚙️</span> Settings</h2>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
+      <div class="form-grid">
         <div>
           <label class="form-label">Company Name</label>
           <input type="text" class="form-control" value="SnapJoy Photo Booth & Event Rentals">
@@ -1289,15 +1443,21 @@
 
   // ===== Mobile sidebar toggle =====
   const sidebarToggle = document.getElementById('mobile-sidebar-toggle');
+  const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('mobile-overlay');
 
   function toggleMobile(open) {
     sidebar.classList.toggle('show', open);
     overlay.classList.toggle('active', open);
+    if (sidebarToggle) {
+      sidebarToggle.classList.toggle('active', open);
+      sidebarToggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    }
     document.body.style.overflow = open ? 'hidden' : '';
   }
   sidebarToggle?.addEventListener('click', () => toggleMobile(!sidebar.classList.contains('show')));
+  sidebarCloseBtn?.addEventListener('click', () => toggleMobile(false));
   overlay?.addEventListener('click', () => toggleMobile(false));
 
   // ===== Section navigation =====
