@@ -151,9 +151,14 @@
       color: var(--nav-text);
       text-decoration: none;
       letter-spacing: -0.5px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 40px;
       line-height: 1;
       font-family: 'Oswald', sans-serif;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .nav-logo-text span { color: var(--accent); }
     .nav-menu-container {
@@ -162,22 +167,29 @@
       justify-content: center;
       flex: 1;
       margin: 0 2rem;
+      height: 40px;
     }
     .nav-links-group {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+      height: 40px;
     }
     .nav-link {
       color: var(--nav-text);
       font-weight: 500;
       transition: color 0.3s;
-      padding: 0.5rem 0;
       font-size: 0.95rem;
       text-decoration: none;
       white-space: nowrap;
       position: relative;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.25rem;
+      box-sizing: border-box;
+      line-height: 1;
     }
     .nav-link::after {
       content: '';
@@ -196,22 +208,28 @@
     .nav-link:hover, .nav-link.active { color: var(--accent); }
     .dropdown-container {
       position: relative;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
     }
     .dropdown-btn {
       background: none;
       border: none;
       color: var(--nav-text);
       font-weight: 500;
-      display: flex;
+      font-family: inherit;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 0.5rem 0;
+      height: 40px;
+      padding: 0 0.25rem;
       cursor: pointer;
       font-size: 0.95rem;
       transition: all 0.3s;
       white-space: nowrap;
       position: relative;
+      box-sizing: border-box;
+      line-height: 1;
     }
     .dropdown-btn::after {
       content: '';
@@ -230,8 +248,9 @@
     .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
     .dropdown-menu {
       position: absolute;
+      top: 100%;
       left: -1rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       width: 220px;
       background: rgba(23, 23, 23, 0.96);
       backdrop-filter: blur(12px);
@@ -264,25 +283,31 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      height: 40px;
     }
     .icon-btn {
       width: 40px;
       height: 40px;
       border-radius: 999px;
       background: rgba(255,255,255,0.05);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: 0.3s;
       color: var(--nav-text);
       border: 1px solid rgba(255,255,255,0.1);
+      box-sizing: border-box;
+      flex-shrink: 0;
+      padding: 0;
+      font-size: 0.9rem;
     }
     .icon-btn:hover { background: var(--accent); color: #171717; border-color: var(--accent); transform: translateY(-2px); }
     .login-btn {
       background: var(--accent);
       color: #171717;
-      padding: 0.6rem 1.5rem;
+      height: 40px;
+      padding: 0 1.5rem;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -291,12 +316,21 @@
       white-space: nowrap;
       font-family: 'Oswald', sans-serif;
       box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      line-height: 1;
+      letter-spacing: 0.5px;
     }
-    .login-btn:hover { background: #B8962E; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+    .login-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
     .login-btn-secondary {
       background: transparent;
       color: var(--nav-text);
-      padding: 0.6rem 1.5rem;
+      height: 40px;
+      padding: 0 1.5rem;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -305,6 +339,12 @@
       white-space: nowrap;
       font-family: 'Oswald', sans-serif;
       border: 2px solid rgba(255,255,255,0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      line-height: 1;
     }
     .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
@@ -317,6 +357,14 @@
         border: none;
         border-bottom: 1px solid rgba(212,175,55,0.15);
       }
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+      }
     }
     
     /* Mobile Menu */
@@ -325,8 +373,13 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 10px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
       z-index: 1001;
+      box-sizing: border-box;
     }
     .hamburger-icon, .close-icon {
       font-size: 1.8rem;
@@ -394,7 +447,7 @@
     }
     .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
     .mobile-login-btn {
-      display: inline-block;
+      display: block;
       margin: 1rem 1.5rem;
       background: var(--accent);
       color: #171717;
@@ -403,6 +456,7 @@
       text-decoration: none;
       font-weight: 700;
       text-align: center;
+      font-family: 'Oswald', sans-serif;
     }
     .mobile-login-btn-secondary {
       display: inline-block;
@@ -462,42 +516,130 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 80px;
+      background: radial-gradient(circle at 15% 30%, rgba(212,175,55,0.1) 0%, transparent 60%), var(--bg-primary);
+      padding-top: 140px;
+      padding-bottom: 70px;
       position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
     }
     .split-hero-container {
       max-width: 1400px;
-      margin: 0 auto;
+      margin: auto;
       padding: 0 1.5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
       width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .split-hero-visual {
+      position: relative;
+      animation: fadeInLeft 0.8s ease-out;
     }
     .split-hero-image {
       border-radius: 28px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      animation: fadeInLeft 0.8s ease-out;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
       position: relative;
+      border: 1px solid rgba(212,175,55,0.3);
     }
     .split-hero-image img {
       width: 100%;
-      height: 600px;
+      height: 580px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .split-hero-image:hover img {
+      transform: scale(1.03);
+    }
+    .split-hero-float {
+      position: absolute;
+      background: rgba(23, 23, 23, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 20px;
+      padding: 0.85rem 1.2rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 3;
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    .split-hero-float.top-left {
+      top: 25px;
+      left: -25px;
+      animation-delay: 0s;
+    }
+    .split-hero-float.bottom-right {
+      bottom: -20px;
+      right: -20px;
+      animation-delay: 2s;
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .split-hero-float-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .split-hero-float-text h5 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .split-hero-float-text p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .split-hero-secondary-card {
+      position: absolute;
+      bottom: 30px;
+      right: -30px;
+      width: 210px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      border: 2px solid var(--accent);
+      z-index: 2;
+      transition: transform 0.3s;
+    }
+    .split-hero-secondary-card:hover {
+      transform: scale(1.05) translateY(-4px);
+      z-index: 4;
+    }
+    .split-hero-secondary-card img {
+      width: 100%;
+      height: 140px;
       object-fit: cover;
       display: block;
     }
-    .split-hero-image::before {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      right: -15px;
-      width: 150px;
-      height: 150px;
-      border: 3px solid var(--accent);
-      border-radius: 28px;
-      z-index: -1;
+    .split-hero-secondary-card .card-caption {
+      background: rgba(23,23,23,0.95);
+      padding: 0.5rem 0.8rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
     }
     .split-hero-content {
       animation: fadeInRight 0.8s ease-out;
@@ -525,8 +667,71 @@
       border: 1px solid rgba(212,175,55,0.3);
     }
     @media (max-width: 992px) {
-      .split-hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .split-hero-image img { height: 400px; }
+      .split-hero {
+        min-height: auto;
+        padding-top: 130px;
+        padding-bottom: 60px;
+      }
+      .split-hero-container { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .split-hero-content { order: 1; }
+      .split-hero-visual { order: 2; max-width: 520px; margin: 0 auto; width: 100%; }
+      .split-hero-image img { height: 380px; }
+      .split-hero-float.top-left { left: 10px; top: 15px; }
+      .split-hero-float.bottom-right { right: 10px; bottom: 15px; }
+      .split-hero-secondary-card { display: none; }
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        top: 12px;
+        left: 12px;
+        width: calc(100% - 24px);
+      }
+      .flex-nav {
+        height: 66px;
+      }
+      .split-hero {
+        padding-top: 115px;
+        padding-bottom: 50px;
+      }
+      .split-hero-image img { height: 320px; }
+      .split-hero-float { padding: 0.6rem 0.9rem; }
+    }
+    @media (max-width: 480px) {
+      .navbar {
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+      }
+      .flex-nav {
+        height: 60px;
+      }
+      .nav-container {
+        padding: 0 0.9rem;
+      }
+      .nav-logo-text {
+        font-size: 1.25rem !important;
+      }
+      .split-hero {
+        padding-top: 98px;
+        padding-bottom: 40px;
+      }
+      .split-hero-image img { height: 260px; }
+      .split-hero-float {
+        padding: 0.45rem 0.75rem;
+        border-radius: 14px;
+        gap: 8px;
+      }
+      .split-hero-float-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+      .split-hero-float-text h5 {
+        font-size: 0.8rem;
+      }
+      .split-hero-float-text p {
+        font-size: 0.68rem;
+      }
     }
 
     /* SECTION 2: BOOTH TYPES GRID */
@@ -665,11 +870,12 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 24px;
-      padding: 2.5rem 2rem;
+      padding: 0 2rem 2.5rem;
       transition: all 0.3s;
       display: flex;
       flex-direction: column;
       position: relative;
+      overflow: hidden;
     }
     .package-card:hover {
       border-color: var(--accent);
@@ -680,6 +886,27 @@
       border: 2px solid var(--accent);
       background: var(--bg-card);
       box-shadow: var(--shadow);
+    }
+    .package-img-header {
+      width: calc(100% + 4rem);
+      margin: 0 -2rem 1.8rem;
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+    .package-img-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .package-card:hover .package-img-header img {
+      transform: scale(1.08);
+    }
+    .package-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
     }
     .package-badge {
       position: absolute;
@@ -932,22 +1159,71 @@
     .gallery-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin-top: 3rem;
+      gap: 1.2rem;
+      margin-top: 1rem;
     }
-    .gallery-strip img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 16px;
-      transition: all 0.4s ease;
+    .gallery-card-item {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 210px;
       border: 1px solid var(--border-color);
-    }
-    .gallery-strip img:hover {
-      transform: scale(1.03);
-      border-color: var(--accent);
       box-shadow: var(--shadow);
     }
+    .gallery-card-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-card-item:hover img {
+      transform: scale(1.08);
+      border-color: var(--accent);
+    }
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.1rem;
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+    }
+    .gallery-card-overlay h5 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 2px;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+    }
+    .gallery-card-overlay span {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cta-trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0 1.5rem;
+    }
+    .cta-tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+    .cta-tag-item i { color: var(--accent); }
 
     @media (max-width: 1024px) {
       .booth-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1043,7 +1319,7 @@
 
     @media (max-width: 1180px) {
       .nav-menu-container, .nav-buttons { display: none; }
-      .mobile-menu-btn { display: block; }
+      .mobile-menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; }
     }
     @media (max-width: 1024px) {
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1059,7 +1335,7 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="flex-nav">
-      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <a href="index.html" class="nav-logo-text"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
       <div class="nav-menu-container">
         <div class="nav-links-group">
           <div class="dropdown-container">
@@ -1084,12 +1360,11 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL" aria-label="Toggle RTL layout"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
         <a href="register.html" class="login-btn">Sign up</a>
-        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
-        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
       </div>
-      <button id="mobile-menu-btn" class="mobile-menu-btn">
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open mobile menu">
         <i class="fas fa-bars hamburger-icon"></i>
         <i class="fas fa-times close-icon"></i>
       </button>
@@ -1111,11 +1386,12 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
-      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
         <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+      <div class="mobile-nav-item" style="border-bottom: none;">
+        <a href="register.html" class="mobile-login-btn">Sign up</a>
       </div>
     </div>
   </div>
@@ -1124,13 +1400,40 @@
 <!-- SECTION 1: SPLIT HERO -->
 <section class="split-hero">
   <div class="split-hero-container">
-    <div class="split-hero-image">
-      <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&auto=format&fit=crop" alt="Luxury mirror photo booth at an elegant event">
+    <div class="split-hero-visual">
+      <div class="split-hero-image">
+        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&auto=format&fit=crop" alt="Luxury interactive mirror photo booth at an elegant event">
+      </div>
+      
+      <!-- Floating Badge Top Left -->
+      <div class="split-hero-float top-left">
+        <div class="split-hero-float-icon"><i class="fas fa-star"></i></div>
+        <div class="split-hero-float-text">
+          <h5>4.9 / 5.0 Rating</h5>
+          <p>500+ Celebrations Hosted</p>
+        </div>
+      </div>
+
+      <!-- Secondary Photo Peeking Card -->
+      <div class="split-hero-secondary-card">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&auto=format&fit=crop" alt="360 Video Booth Experience">
+        <div class="card-caption">🎥 360° Slow-Mo Video</div>
+      </div>
+
+      <!-- Floating Badge Bottom Right -->
+      <div class="split-hero-float bottom-right">
+        <div class="split-hero-float-icon"><i class="fas fa-bolt"></i></div>
+        <div class="split-hero-float-text">
+          <h5>Instant Prints & AirDrop</h5>
+          <p>4K Digital Sharing Station</p>
+        </div>
+      </div>
     </div>
+    
     <div class="split-hero-content">
-      <span class="hero-tag">Premium Photo Experiences</span>
+      <span class="hero-tag"><i class="fas fa-sparkles"></i> Premium Photo Experiences</span>
       <h1 class="font-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom:1.5rem;">The Booth That<br><span class="text-accent">Steals the Show</span></h1>
-      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem;">From intimate weddings to grand corporate galas, our luxury photo booths deliver unforgettable moments with unmatched elegance and style.</p>
+      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem; line-height: 1.6;">From intimate luxury weddings to grand corporate galas, our photo booth rentals deliver unforgettable moments with unmatched elegance, custom backdrops, and instant guest prints.</p>
       <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
         <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Reserve Your Date</a>
         <a href="service.html" class="btn-outline">Explore Booths <i class="fas fa-arrow-right"></i></a>
@@ -1138,15 +1441,15 @@
       <div style="display:flex; gap:2rem; flex-wrap:wrap; padding-top:1.5rem; border-top:1px solid var(--border-color);">
         <div>
           <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">500+</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Events</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Events Hosted</div>
         </div>
         <div>
           <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">4.9★</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Rating</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Verified Rating</div>
         </div>
         <div>
           <div style="font-family:'Oswald',sans-serif; font-size:1.8rem; color:var(--accent); font-weight:700;">7</div>
-          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Years</div>
+          <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Years Excellence</div>
         </div>
       </div>
     </div>
@@ -1224,6 +1527,10 @@
     <div class="packages-grid">
       
       <div class="package-card">
+        <div class="package-img-header">
+          <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop" alt="Open Air Photo Booth Package">
+          <div class="package-img-overlay"></div>
+        </div>
         <h3 class="package-name">Essential</h3>
         <p class="package-desc">Perfect for intimate gatherings and smaller celebrations.</p>
         <div class="package-price">$599<span>/event</span></div>
@@ -1239,6 +1546,10 @@
       </div>
 
       <div class="package-card featured">
+        <div class="package-img-header">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop" alt="Signature Mirror Booth Package">
+          <div class="package-img-overlay"></div>
+        </div>
         <span class="package-badge">Most Popular</span>
         <h3 class="package-name">Signature</h3>
         <p class="package-desc">Our most-loved package for weddings and milestone events.</p>
@@ -1256,6 +1567,10 @@
       </div>
 
       <div class="package-card">
+        <div class="package-img-header">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop" alt="Luxury 360 Video Booth Package">
+          <div class="package-img-overlay"></div>
+        </div>
         <h3 class="package-name">Luxury 360</h3>
         <p class="package-desc">The ultimate party experience with our 360 video booth.</p>
         <div class="package-price">$1,299<span>/event</span></div>
@@ -1332,22 +1647,60 @@
         <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&auto=format&fit=crop" alt="Elegant event photo booth setup">
       </div>
       <div class="newsletter-content">
-        <span class="hero-tag" style="margin-bottom:1rem;">Stay Inspired</span>
-        <h2>Get <span class="text-accent">10% Off</span> Your First Booking</h2>
-        <p>Join our newsletter for event inspiration, seasonal offers, and exclusive photo booth tips. New subscribers receive 10% off their first booking.</p>
+        <span class="hero-tag" style="margin-bottom:1rem;"><i class="fas fa-sparkles"></i> VIP Club</span>
+        <h2>Get <span class="text-accent">10% Off</span> Your Next Booking</h2>
+        <p>Join our private newsletter for event styling ideas, seasonal promotions, and early date reservation access.</p>
+        <div class="cta-trust-tags">
+          <span class="cta-tag-item"><i class="fas fa-tag"></i> Instant 10% Promo Code</span>
+          <span class="cta-tag-item"><i class="fas fa-book-open"></i> 2026 Event Checklist</span>
+          <span class="cta-tag-item"><i class="fas fa-lock"></i> Zero Spam Guarantee</span>
+        </div>
         <form class="newsletter-form" id="newsletter-form">
           <input type="email" placeholder="Enter your email address" required>
-          <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Subscribe</button>
+          <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Claim 10% Off</button>
         </form>
         <p class="newsletter-success" id="newsletter-success"><i class="fas fa-check-circle"></i> You're in! Check your inbox for your discount code.</p>
       </div>
     </div>
 
+    <!-- Live event gallery showcase -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:3.5rem; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="hero-tag" style="margin-bottom:0.4rem;"><i class="fas fa-camera"></i> Live From Recent Events</span>
+        <h3 class="font-heading" style="font-size:2rem; margin:0;">Captured on <span class="text-accent">SnapJoy Booths</span></h3>
+      </div>
+      <a href="service.html" class="btn-outline" style="padding:0.6rem 1.4rem; font-size:0.85rem;">Explore All Booths <i class="fas fa-arrow-right"></i></a>
+    </div>
+
     <div class="gallery-strip">
-      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop" alt="Party photo booth moment">
-      <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop" alt="Festival photo booth">
-      <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop" alt="Corporate event photo booth">
-      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop" alt="Wedding photo booth">
+      <div class="gallery-card-item">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&auto=format&fit=crop" alt="Birthday Celebration">
+        <div class="gallery-card-overlay">
+          <h5>Sweet 16 Party</h5>
+          <span>Open Air Booth</span>
+        </div>
+      </div>
+      <div class="gallery-card-item">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&auto=format&fit=crop" alt="Music Festival">
+        <div class="gallery-card-overlay">
+          <h5>Festival VIP Lounge</h5>
+          <span>360 Video Booth</span>
+        </div>
+      </div>
+      <div class="gallery-card-item">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&auto=format&fit=crop" alt="Corporate Gala">
+        <div class="gallery-card-overlay">
+          <h5>Beverly Hills Gala</h5>
+          <span>Interactive Mirror</span>
+        </div>
+      </div>
+      <div class="gallery-card-item">
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop" alt="Rooftop Wedding">
+        <div class="gallery-card-overlay">
+          <h5>Rooftop Reception</h5>
+          <span>Custom Monogram</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

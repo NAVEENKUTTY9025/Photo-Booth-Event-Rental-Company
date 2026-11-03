@@ -88,7 +88,7 @@
       box-shadow: 0 4px 15px rgba(212,175,55,0.3);
     }
 
-    /* NAVBAR (exact same as index.html) */
+    /* NAVBAR */
     .navbar {
       background: rgba(23, 23, 23, 0.88);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -102,17 +102,26 @@
     .nav-logo-text {
       font-size: 1.6rem !important; font-weight: 700 !important;
       color: var(--nav-text); text-decoration: none;
-      letter-spacing: -0.5px; display: inline-block;
+      letter-spacing: -0.5px; display: inline-flex;
+      align-items: center; gap: 0.5rem; height: 40px;
       line-height: 1; font-family: 'Oswald', sans-serif;
+      box-sizing: border-box; flex-shrink: 0;
     }
     .nav-logo-text span { color: var(--accent); }
 
-    .nav-menu-container { display: flex; align-items: center; justify-content: center; flex: 1; margin: 0 2rem; }
-    .nav-links-group { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-menu-container {
+      display: flex; align-items: center; justify-content: center;
+      flex: 1; margin: 0 2rem; height: 40px;
+    }
+    .nav-links-group {
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; height: 40px;
+    }
     .nav-link {
       color: var(--nav-text); font-weight: 500; transition: color 0.3s;
-      padding: 0.5rem 0; font-size: 0.95rem; text-decoration: none;
+      font-size: 0.95rem; text-decoration: none;
       white-space: nowrap; position: relative;
+      height: 40px; display: inline-flex; align-items: center;
+      padding: 0 0.25rem; box-sizing: border-box; line-height: 1;
     }
     .nav-link::after {
       content: ''; position: absolute; width: 0; height: 2px;
@@ -122,12 +131,16 @@
     .nav-link:hover::after, .nav-link.active::after { width: 100%; left: 0; }
     .nav-link:hover, .nav-link.active { color: var(--accent); }
 
-    .dropdown-container { position: relative; display: inline-block; }
+    .dropdown-container {
+      position: relative; display: inline-flex; align-items: center; height: 40px;
+    }
     .dropdown-btn {
       background: none; border: none; color: var(--nav-text);
-      font-weight: 500; display: flex; align-items: center; gap: 6px;
-      padding: 0.5rem 0; cursor: pointer; font-size: 0.95rem;
+      font-weight: 500; font-family: inherit; display: inline-flex;
+      align-items: center; gap: 6px; height: 40px; padding: 0 0.25rem;
+      cursor: pointer; font-size: 0.95rem;
       transition: all 0.3s; white-space: nowrap; position: relative;
+      box-sizing: border-box; line-height: 1;
     }
     .dropdown-btn::after {
       content: ''; position: absolute; width: 0; height: 2px;
@@ -137,7 +150,7 @@
     .dropdown-btn:hover::after, .dropdown-btn.active::after { width: 100%; left: 0; }
     .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
     .dropdown-menu {
-      position: absolute; left: -1rem; margin-top: 1rem; width: 220px;
+      position: absolute; top: 100%; left: -1rem; margin-top: 0.5rem; width: 220px;
       background: rgba(23, 23, 23, 0.96); backdrop-filter: blur(12px);
       border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       opacity: 0; visibility: hidden; transition: all 0.3s;
@@ -154,43 +167,55 @@
     .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
     .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(212,175,55,0.1); color: var(--accent); }
 
-    .nav-buttons { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-buttons { display: flex; align-items: center; gap: 0.75rem; height: 40px; }
     .icon-btn {
       width: 40px; height: 40px; border-radius: 999px;
-      background: rgba(255,255,255,0.05); display: flex;
+      background: rgba(255,255,255,0.05); display: inline-flex;
       align-items: center; justify-content: center; cursor: pointer;
       transition: 0.3s; color: var(--nav-text);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box;
+      flex-shrink: 0; padding: 0; font-size: 0.9rem;
     }
     .icon-btn:hover {
       background: var(--accent); color: #171717;
       border-color: var(--accent); transform: translateY(-2px);
     }
     .login-btn {
-      background: var(--accent); color: #171717; padding: 0.6rem 1.5rem;
-      border-radius: 999px; font-weight: 700; text-decoration: none;
-      font-size: 0.85rem; transition: 0.3s; white-space: nowrap;
-      font-family: 'Oswald', sans-serif;
+      background: var(--accent); color: #171717; height: 40px;
+      padding: 0 1.5rem; border-radius: 999px; font-weight: 700;
+      text-decoration: none; font-size: 0.85rem; transition: 0.3s;
+      white-space: nowrap; font-family: 'Oswald', sans-serif;
       box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+      display: inline-flex; align-items: center; justify-content: center;
+      border: none; box-sizing: border-box; flex-shrink: 0;
+      line-height: 1; letter-spacing: 0.5px;
     }
     .login-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
     .login-btn-secondary {
-      background: transparent; color: var(--nav-text); padding: 0.6rem 1.5rem;
-      border-radius: 999px; font-weight: 700; text-decoration: none;
-      font-size: 0.85rem; transition: 0.3s; white-space: nowrap;
-      font-family: 'Oswald', sans-serif;
-      border: 2px solid rgba(255,255,255,0.2);
+      background: transparent; color: var(--nav-text); height: 40px;
+      padding: 0 1.5rem; border-radius: 999px; font-weight: 700;
+      text-decoration: none; font-size: 0.85rem; transition: 0.3s;
+      white-space: nowrap; font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2); display: inline-flex;
+      align-items: center; justify-content: center; box-sizing: border-box;
+      flex-shrink: 0; line-height: 1;
     }
     .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
     @media (max-width: 1180px) {
       .navbar { width: 100%; top: 0; left: 0; border-radius: 0; border: none; border-bottom: 1px solid rgba(212,175,55,0.15); }
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px;
+      }
     }
 
     /* Mobile Menu */
     .mobile-menu-btn {
       display: none; background: none; border: none;
-      cursor: pointer; padding: 10px; z-index: 1001;
+      cursor: pointer; padding: 0; width: 40px; height: 40px;
+      align-items: center; justify-content: center; z-index: 1001;
     }
     .hamburger-icon, .close-icon { font-size: 1.8rem; color: var(--nav-text); }
     .close-icon { display: none; }
@@ -222,23 +247,198 @@
     .mobile-submenu.show { max-height: 300px; }
     .mobile-submenu a { display: block; padding: 0.75rem 1rem 0.75rem 2.5rem; color: var(--nav-text); text-decoration: none; opacity: 0.8; font-size: 0.9rem; }
     .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
-    .mobile-login-btn { display: inline-block; margin: 1rem 1.5rem; background: var(--accent); color: #171717; padding: 0.75rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; text-align: center; }
+    .mobile-login-btn { display: block; margin: 1rem 1.5rem; background: var(--accent); color: #171717; padding: 0.75rem 1.5rem; border-radius: 999px; text-decoration: none; font-weight: 700; text-align: center; font-family: 'Oswald', sans-serif; }
     .mobile-login-btn-secondary { display: inline-block; margin: 1rem 1.5rem; background: transparent; color: var(--nav-text); padding: 0.75rem 1.5rem; border-radius: 999px; border: 2px solid rgba(255,255,255,0.2); text-decoration: none; font-weight: 700; text-align: center; }
     .mobile-theme-rtl { display: flex; gap: 1rem; padding: 1rem 1.5rem; border-top: 1px solid rgba(212,175,55,0.15); flex-wrap: wrap; }
     .mobile-icon-btn { background: rgba(212,175,55,0.15); border: none; padding: 0.6rem 1rem; border-radius: 999px; color: var(--nav-text); cursor: pointer; }
     .mobile-icon-btn:hover { background: var(--accent); color: #171717; }
 
-    /* Page Header */
+    /* Unified Luxury Page Header / Hero across non-Home pages */
     .page-header {
-      padding: 180px 0 100px; background: var(--bg-secondary);
-      text-align: center; position: relative; overflow: hidden;
+      position: relative;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 1.5rem 60px;
+      overflow: hidden;
+      background: var(--bg-nav);
+    }
+    .page-header-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      transform: scale(1.03);
+      filter: brightness(0.7);
+      transition: transform 0.6s ease;
+    }
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.85) 60%, rgba(10,10,10,0.94) 100%);
+      z-index: 1;
+    }
+    .page-header .container {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .page-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.8rem;
+    }
+    .page-breadcrumb a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .page-breadcrumb a:hover { color: var(--accent); }
+    .page-breadcrumb i { font-size: 0.65rem; color: var(--accent); }
+    .page-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(212,175,55,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(8px);
     }
     .page-header h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-family: 'Oswald', sans-serif; margin-bottom: 1rem;
-      color: var(--text-primary);
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.8rem;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      line-height: 1.15;
     }
-    .page-header p { color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+    .page-header p {
+      color: rgba(255,255,255,0.88);
+      max-width: 720px;
+      margin: 0 auto 1.4rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .page-header-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .header-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.35rem 0.95rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      backdrop-filter: blur(8px);
+    }
+    .header-pill i { color: var(--accent); font-size: 0.78rem; }
+    
+    .cta-visual-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 28px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .cta-visual-card::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-visual-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+    .cta-visual-img-wrap img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .cta-visual-card:hover .cta-visual-img-wrap img {
+      transform: scale(1.04);
+    }
+    .cta-floating-badge {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background: rgba(23, 23, 23, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.4);
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cta-trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0 1.8rem;
+    }
+    .cta-tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+    .cta-tag-item i { color: var(--accent); }
+    
+    @media (max-width: 992px) {
+      .cta-visual-card { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .cta-visual-img-wrap img { height: 260px; }
+    }
+    @media (max-width: 768px) {
+      .page-header {
+        min-height: 380px;
+        padding: 130px 1rem 50px;
+      }
+    }
 
     .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
     section { padding: 100px 0; border-bottom: 1px solid var(--border-color); }
@@ -346,7 +546,7 @@
 
     @media (max-width: 1180px) {
       .nav-menu-container, .nav-buttons { display: none; }
-      .mobile-menu-btn { display: block; }
+      .mobile-menu-btn { display: inline-flex; }
     }
     @media (max-width: 1024px) {
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -362,7 +562,7 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="flex-nav">
-      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <a href="index.html" class="nav-logo-text"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
       <div class="nav-menu-container">
         <div class="nav-links-group">
           <div class="dropdown-container">
@@ -387,10 +587,9 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL" aria-label="Toggle RTL layout"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
         <a href="register.html" class="login-btn">Sign up</a>
-        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
-        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
       </div>
       <button id="mobile-menu-btn" class="mobile-menu-btn">
         <i class="fas fa-bars hamburger-icon"></i>
@@ -414,21 +613,35 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
-      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
         <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
       </div>
+      <div class="mobile-nav-item" style="border-bottom: none;"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
     </div>
   </div>
 </nav>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
+  <div class="page-header-bg" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&auto=format&fit=crop');"></div>
+  <div class="page-header-overlay"></div>
   <div class="container">
-    <h1 class="font-heading">Our <span class="text-accent">Services</span></h1>
-    <p>Six signature photo experiences designed to make every celebration unforgettable.</p>
+    <div class="page-breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Our Services</span>
+    </div>
+    <br>
+    <span class="page-header-badge"><i class="fas fa-camera"></i> Premium Rental Lineup</span>
+    <h1 class="font-heading">Six Signature <span class="text-accent">Photo Experiences</span></h1>
+    <p>From sleek open-air setups to 360 slow-motion video and interactive magic mirrors — designed to make your celebration the talk of the town.</p>
+    <div class="page-header-pills">
+      <span class="header-pill"><i class="fas fa-print"></i> Unlimited High-Speed Prints</span>
+      <span class="header-pill"><i class="fas fa-users"></i> On-Site Attendant Included</span>
+      <span class="header-pill"><i class="fas fa-palette"></i> Custom Branded Overlays</span>
+      <span class="header-pill"><i class="fas fa-bolt"></i> Instant QR & AirDrop Sharing</span>
+    </div>
   </div>
 </div>
 
@@ -591,12 +804,30 @@
 <!-- CTA -->
 <section>
   <div class="container">
-    <div class="cta-banner">
-      <h3 class="font-heading" style="font-size:2rem;">Not Sure Which <span class="text-accent">Booth?</span></h3>
-      <p style="margin:1rem 0; color: var(--text-secondary);">Talk to our team and we'll help you pick the perfect photo experience for your event.</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Get a Free Consultation</a>
-        <a href="faq.html" class="btn-outline">Read FAQ <i class="fas fa-arrow-right"></i></a>
+    <div class="cta-visual-card">
+      <div>
+        <span class="page-header-badge" style="margin-bottom:0.8rem;"><i class="fas fa-sliders-h"></i> Personalized Experience</span>
+        <h3 class="font-heading" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); line-height: 1.2; margin-bottom: 0.8rem; color: var(--text-primary);">
+          Not Sure Which Booth <span class="text-accent">Fits Your Event?</span>
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.98rem;">
+          Our event concierges match your venue dimensions, guest count, and theme with the ideal booth setup. Free custom template proof included with every quote.
+        </p>
+        <div class="cta-trust-tags">
+          <span class="cta-tag-item"><i class="fas fa-check-circle"></i> Free Floorplan Fit Consultation</span>
+          <span class="cta-tag-item"><i class="fas fa-truck"></i> Free Delivery within 50 Miles</span>
+          <span class="cta-tag-item"><i class="fas fa-award"></i> All-Inclusive No-Hidden-Fee Pricing</span>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Get Free Consultation</a>
+          <a href="faq.html" class="btn-outline">View FAQ & Pricing <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="cta-visual-img-wrap">
+        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&auto=format&fit=crop" alt="Photo booth options preview">
+        <div class="cta-floating-badge">
+          <i class="fas fa-sparkles" style="color:var(--accent);"></i> Custom Monogram & Props Included
+        </div>
       </div>
     </div>
   </div>

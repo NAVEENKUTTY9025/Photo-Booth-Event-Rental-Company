@@ -155,9 +155,14 @@
       color: var(--nav-text);
       text-decoration: none;
       letter-spacing: -0.5px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 40px;
       line-height: 1;
       font-family: 'Oswald', sans-serif;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     .nav-logo-text span {
       color: var(--accent);
@@ -168,22 +173,29 @@
       justify-content: center;
       flex: 1;
       margin: 0 2rem;
+      height: 40px;
     }
     .nav-links-group {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+      height: 40px;
     }
     .nav-link {
       color: var(--nav-text);
       font-weight: 500;
       transition: color 0.3s;
-      padding: 0.5rem 0;
       font-size: 0.95rem;
       text-decoration: none;
       white-space: nowrap;
       position: relative;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.25rem;
+      box-sizing: border-box;
+      line-height: 1;
     }
     .nav-link::after {
       content: '';
@@ -202,22 +214,28 @@
     .nav-link:hover, .nav-link.active { color: var(--accent); }
     .dropdown-container {
       position: relative;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      height: 40px;
     }
     .dropdown-btn {
       background: none;
       border: none;
       color: var(--nav-text);
       font-weight: 500;
-      display: flex;
+      font-family: inherit;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 0.5rem 0;
+      height: 40px;
+      padding: 0 0.25rem;
       cursor: pointer;
       font-size: 0.95rem;
       transition: all 0.3s;
       white-space: nowrap;
       position: relative;
+      box-sizing: border-box;
+      line-height: 1;
     }
     .dropdown-btn::after {
       content: '';
@@ -236,8 +254,9 @@
     .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
     .dropdown-menu {
       position: absolute;
+      top: 100%;
       left: -1rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       width: 220px;
       background: rgba(23, 23, 23, 0.96);
       backdrop-filter: blur(12px);
@@ -270,25 +289,31 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      height: 40px;
     }
     .icon-btn {
       width: 40px;
       height: 40px;
       border-radius: 999px;
       background: rgba(255,255,255,0.05);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: 0.3s;
       color: var(--nav-text);
       border: 1px solid rgba(255,255,255,0.1);
+      box-sizing: border-box;
+      flex-shrink: 0;
+      padding: 0;
+      font-size: 0.9rem;
     }
     .icon-btn:hover { background: var(--accent); color: #171717; border-color: var(--accent); transform: translateY(-2px); }
     .login-btn {
       background: var(--accent);
       color: #171717;
-      padding: 0.6rem 1.5rem;
+      height: 40px;
+      padding: 0 1.5rem;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -297,12 +322,21 @@
       white-space: nowrap;
       font-family: 'Oswald', sans-serif;
       box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      line-height: 1;
+      letter-spacing: 0.5px;
     }
     .login-btn:hover { background: #B8962E; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
     .login-btn-secondary {
       background: transparent;
       color: var(--nav-text);
-      padding: 0.6rem 1.5rem;
+      height: 40px;
+      padding: 0 1.5rem;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -311,6 +345,12 @@
       white-space: nowrap;
       font-family: 'Oswald', sans-serif;
       border: 2px solid rgba(255,255,255,0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      line-height: 1;
     }
     .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
@@ -323,6 +363,14 @@
         border: none;
         border-bottom: 1px solid rgba(212,175,55,0.15);
       }
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+      }
     }
     
     /* Mobile Menu */
@@ -331,7 +379,11 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 10px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
       z-index: 1001;
     }
     .hamburger-icon, .close-icon {
@@ -400,7 +452,7 @@
     }
     .mobile-submenu a:hover, .mobile-submenu a.active { color: var(--accent); opacity: 1; }
     .mobile-login-btn {
-      display: inline-block;
+      display: block;
       margin: 1rem 1.5rem;
       background: var(--accent);
       color: #171717;
@@ -409,6 +461,7 @@
       text-decoration: none;
       font-weight: 700;
       text-align: center;
+      font-family: 'Oswald', sans-serif;
     }
     .mobile-login-btn-secondary {
       display: inline-block;
@@ -439,35 +492,147 @@
     }
     .mobile-icon-btn:hover { background: var(--accent); color: #171717; }
 
-    /* Hero Section */
+    /* Hero Section Enhanced */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: var(--bg-primary);
-      padding-top: 80px;
+      background: radial-gradient(circle at 85% 30%, rgba(212,175,55,0.12) 0%, transparent 60%), var(--bg-primary);
+      padding-top: 140px;
+      padding-bottom: 70px;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
     .hero-container {
       max-width: 1400px;
-      margin: 0 auto;
+      margin: auto;
+      width: 100%;
       padding: 0 1.5rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3.5rem;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
     .hero-content { animation: fadeInLeft 0.8s ease-out; }
-    .hero-image {
+    .hero-visual-wrapper {
+      position: relative;
       animation: fadeInRight 0.8s ease-out;
-      border-radius: 24px;
+    }
+    .hero-image {
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      border: 1px solid rgba(212,175,55,0.3);
+      position: relative;
     }
     .hero-image img {
       width: 100%;
-      height: auto;
+      height: 520px;
       display: block;
       object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .hero-image:hover img {
+      transform: scale(1.03);
+    }
+    .hero-float-card {
+      position: absolute;
+      background: rgba(23, 23, 23, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 20px;
+      padding: 0.9rem 1.2rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 3;
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    .hero-float-card.top-right {
+      top: 25px;
+      right: -25px;
+      animation-delay: 0s;
+    }
+    .hero-float-card.bottom-left {
+      bottom: -20px;
+      left: -20px;
+      animation-delay: 2s;
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-float-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .hero-float-text h5 {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #FFFFFF;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .hero-float-text p {
+      margin: 0;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .hero-polaroid-peek {
+      position: absolute;
+      bottom: 25px;
+      right: -20px;
+      background: #FFFFFF;
+      padding: 8px 8px 18px;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      transform: rotate(6deg);
+      width: 140px;
+      z-index: 2;
+      transition: transform 0.3s;
+    }
+    .hero-polaroid-peek:hover {
+      transform: rotate(0deg) scale(1.05);
+      z-index: 4;
+    }
+    .hero-polaroid-peek img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+    .hero-polaroid-peek span {
+      display: block;
+      text-align: center;
+      font-size: 0.65rem;
+      color: #171717;
+      font-weight: 700;
+      margin-top: 6px;
+      font-family: 'Inter', sans-serif;
     }
     @keyframes fadeInLeft {
       from { opacity: 0; transform: translateX(-40px); }
@@ -478,8 +643,70 @@
       to { opacity: 1; transform: translateX(0); }
     }
     @media (max-width: 992px) {
-      .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .hero-image { max-width: 500px; margin: 0 auto; }
+      .hero {
+        min-height: auto;
+        padding-top: 130px;
+        padding-bottom: 60px;
+      }
+      .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .hero-visual-wrapper { max-width: 520px; margin: 0 auto; width: 100%; }
+      .hero-image img { height: 380px; }
+      .hero-float-card.top-right { right: 10px; }
+      .hero-float-card.bottom-left { left: 10px; }
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        top: 12px;
+        left: 12px;
+        width: calc(100% - 24px);
+      }
+      .flex-nav {
+        height: 66px;
+      }
+      .hero {
+        padding-top: 115px;
+        padding-bottom: 50px;
+      }
+      .hero-float-card { padding: 0.6rem 0.9rem; }
+      .hero-polaroid-peek { display: none; }
+      .hero-image img { height: 320px; }
+    }
+    @media (max-width: 480px) {
+      .navbar {
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+      }
+      .flex-nav {
+        height: 60px;
+      }
+      .nav-container {
+        padding: 0 0.9rem;
+      }
+      .nav-logo-text {
+        font-size: 1.25rem !important;
+      }
+      .hero {
+        padding-top: 98px;
+        padding-bottom: 40px;
+      }
+      .hero-image img { height: 260px; }
+      .hero-float-card {
+        padding: 0.45rem 0.75rem;
+        border-radius: 14px;
+        gap: 8px;
+      }
+      .hero-float-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+      .hero-float-text h5 {
+        font-size: 0.8rem;
+      }
+      .hero-float-text p {
+        font-size: 0.68rem;
+      }
     }
     
     .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
@@ -529,9 +756,144 @@
     }
     .card-icon { font-size: 2.8rem; color: var(--accent); margin-bottom: 1.5rem; }
     .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.8rem; }
-    .step-item { background: var(--bg-card); padding: 1.8rem; text-align: center; border-bottom: 3px solid var(--accent); border-radius: 16px; transition: 0.3s; }
+    
+    /* Why Choose Us & How It Works Visual Cards */
+    .step-img-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .step-img-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .step-img-wrap {
+      position: relative;
+      height: 170px;
+      overflow: hidden;
+    }
+    .step-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .step-img-card:hover .step-img-wrap img {
+      transform: scale(1.06);
+    }
+    .step-icon-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(23,23,23,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.4);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .step-number-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: #171717;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .step-card-body {
+      padding: 1.4rem;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .step-card-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+    .step-card-body p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Testimonials with Guest Avatars */
     .testimonial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-    .testimonial-card { background: var(--bg-card); padding: 2rem; border-left: 4px solid var(--accent); border-radius: 16px; }
+    .testimonial-card {
+      background: var(--bg-card);
+      padding: 2.2rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+    .testimonial-quote {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 1rem 0 1.5rem;
+    }
+    .testimonial-author-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .testimonial-meta h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      margin: 0 0 2px 0;
+      color: var(--text-primary);
+    }
+    .testimonial-meta span {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 500;
+      display: block;
+    }
     .faq-item { background: var(--bg-card); margin-bottom: 1rem; border-left: 3px solid var(--accent); border-radius: 12px; }
     .faq-question {
       width: 100%;
@@ -560,6 +922,84 @@
       border: 1px solid var(--accent);
       border-radius: 28px;
       margin-top: 3rem;
+    }
+    .cta-visual-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 28px;
+      margin-top: 3.5rem;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-visual-card::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-visual-img-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+    .cta-visual-img-wrap img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .cta-visual-card:hover .cta-visual-img-wrap img {
+      transform: scale(1.04);
+    }
+    .cta-floating-badge {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background: rgba(23, 23, 23, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.4);
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cta-trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0 1.8rem;
+    }
+    .cta-tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+    .cta-tag-item i { color: var(--accent); }
+    @media (max-width: 992px) {
+      .cta-visual-card { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .cta-visual-img-wrap img { height: 260px; }
     }
     
     /* Footer */
@@ -660,7 +1100,7 @@
 <nav class="navbar">
   <div class="nav-container">
     <div class="flex-nav">
-      <a href="index.html" class="nav-logo-text" style="display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
+      <a href="index.html" class="nav-logo-text"><i class="fa-solid fa-camera-retro" style="color: var(--accent); font-size: 1.5rem;"></i><span>SNAPJOY</span></a>
       <div class="nav-menu-container">
         <div class="nav-links-group">
           <div class="dropdown-container">
@@ -685,10 +1125,9 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn-secondary">Sign In</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL" aria-label="Toggle RTL layout"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme" aria-label="Toggle dark/light theme"><i class="fas fa-moon"></i></button>
         <a href="register.html" class="login-btn">Sign up</a>
-        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
-        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
       </div>
       <button id="mobile-menu-btn" class="mobile-menu-btn">
         <i class="fas fa-bars hamburger-icon"></i>
@@ -712,12 +1151,11 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
-      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
         <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
       </div>
+      <div class="mobile-nav-item" style="border-bottom: none;"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
     </div>
   </div>
 </nav>
@@ -726,20 +1164,48 @@
 <section class="hero">
   <div class="hero-container">
     <div class="hero-content">
-      <h1 class="font-heading" style="font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin-bottom:1.5rem;">Premium <span class="text-accent">Photo Booth<br>& Event Rentals</span></h1>
-      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem;">Elevate your wedding, corporate gala, or party with our luxury photo experiences. Open-air, mirror, and 360 booths with custom backdrops and instant sharing.</p>
+      <span class="hero-tag" style="margin-bottom:1.2rem;"><i class="fas fa-sparkles"></i> Nationwide Luxury Event Rentals</span>
+      <h1 class="font-heading" style="font-size: clamp(2.5rem, 6.5vw, 4rem); line-height: 1.1; margin-bottom:1.5rem;">Premium <span class="text-accent">Photo Booth<br>& Event Rentals</span></h1>
+      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem; line-height: 1.6;">Elevate your wedding, corporate gala, or VIP party with our luxury photo experiences. Open-air, interactive mirror, and 360 video booths with custom backdrops and instant prints.</p>
       <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <a href="#" class="btn-primary"><i class="fas fa-camera"></i> Check Availability</a>
+        <a href="contact.html" class="btn-primary"><i class="fas fa-camera"></i> Check Availability</a>
         <a href="#services" class="btn-outline">View Packages <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div style="margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap:wrap;">
+      <div style="margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap:wrap; font-size: 0.95rem;">
         <span><i class="fas fa-check-circle text-accent"></i> 5-Star Service</span>
-        <span><i class="fas fa-shield-alt text-accent"></i> Fully Insured</span>
+        <span><i class="fas fa-shield-alt text-accent"></i> $2M COI Insured</span>
         <span><i class="fas fa-star text-accent"></i> 500+ Events</span>
       </div>
     </div>
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&auto=format&fit=crop" alt="Luxury photo booth at a wedding reception">
+    
+    <div class="hero-visual-wrapper">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&auto=format&fit=crop" alt="Luxury photo booth at a high-end celebration">
+      </div>
+      
+      <!-- Floating Trust Badge: Top Right -->
+      <div class="hero-float-card top-right">
+        <div class="hero-float-icon"><i class="fas fa-star"></i></div>
+        <div class="hero-float-text">
+          <h5>4.9 / 5.0 Rating</h5>
+          <p>Over 500+ Celebrations Hosted</p>
+        </div>
+      </div>
+      
+      <!-- Floating Equipment Badge: Bottom Left -->
+      <div class="hero-float-card bottom-left">
+        <div class="hero-float-icon"><i class="fas fa-bolt"></i></div>
+        <div class="hero-float-text">
+          <h5>Instant Prints & AirDrop</h5>
+          <p>Unlimited 4x6 Studio Prints</p>
+        </div>
+      </div>
+      
+      <!-- Polaroid peek card -->
+      <div class="hero-polaroid-peek">
+        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=400&auto=format&fit=crop" alt="Guest photo strip moment">
+        <span>#SNAPJOY2026</span>
+      </div>
     </div>
   </div>
 </section>
@@ -773,46 +1239,172 @@
   </div>
 </section>
 
-<!-- SECTION 3: WHY CHOOSE US (HD Image) -->
+<!-- SECTION 3: WHY CHOOSE US (Visual Cards) -->
 <section style="background: var(--bg-secondary);">
   <div class="container">
     <h2 class="section-title">Why <span class="text-accent">Choose SnapJoy</span></h2>
     <div class="accent-divider"></div>
+    <p class="section-sub">Elevating your celebrations with studio-grade equipment, tailored aesthetics, and white-glove service.</p>
     <div class="steps-grid">
-      <div class="step-item"><i class="fas fa-crown" style="font-size:2rem; color:var(--accent);"></i><h3>Luxury Experience</h3><p>Premium booths & backdrops</p></div>
-      <div class="step-item"><i class="fas fa-clock" style="font-size:2rem; color:var(--accent);"></i><h3>Full-Service Setup</h3><p>We handle everything</p></div>
-      <div class="step-item"><i class="fas fa-camera" style="font-size:2rem; color:var(--accent);"></i><h3>Unlimited Prints</h3><p>Guests take home memories</p></div>
-      <div class="step-item"><i class="fas fa-receipt" style="font-size:2rem; color:var(--accent);"></i><h3>Custom Packages</h3><p>Tailored to your event</p></div>
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&auto=format&fit=crop" alt="Luxury Photo Booth Setup">
+          <div class="step-icon-badge"><i class="fas fa-crown"></i></div>
+        </div>
+        <div class="step-card-body">
+          <h3>Luxury Experience</h3>
+          <p>Hand-crafted sequin walls, custom neon signage, and flattering studio ring lighting.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&auto=format&fit=crop" alt="Full-Service Attendant Setup">
+          <div class="step-icon-badge"><i class="fas fa-clock"></i></div>
+        </div>
+        <div class="step-card-body">
+          <h3>White-Glove Setup</h3>
+          <p>Our dedicated technicians arrive 90 minutes early to test and style everything flawlessly.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&auto=format&fit=crop" alt="Unlimited Studio Prints">
+          <div class="step-icon-badge"><i class="fas fa-camera"></i></div>
+        </div>
+        <div class="step-card-body">
+          <h3>Unlimited Prints</h3>
+          <p>Instant 4x6 and photostrip prints for every single guest in the photo, plus SMS AirDrop.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop" alt="Custom Branding & Packages">
+          <div class="step-icon-badge"><i class="fas fa-receipt"></i></div>
+        </div>
+        <div class="step-card-body">
+          <h3>Custom Packages</h3>
+          <p>Bespoke monograms, branded digital frames, and curated premium props for your theme.</p>
+        </div>
+      </div>
     </div>
-    
   </div>
 </section>
 
-<!-- SECTION 4: TESTIMONIALS -->
+<!-- SECTION 4: TESTIMONIALS (With Client Avatars) -->
 <section id="testimonials">
   <div class="container">
     <h2 class="section-title">Loved by <span class="text-accent">Clients</span></h2>
     <div class="accent-divider"></div>
+    <p class="section-sub">Read verified reviews from newlyweds, event planners, and corporate producers.</p>
     <div class="testimonial-grid">
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"SnapJoy made our wedding unforgettable. The mirror booth was a hit and the photos are stunning!"</p><h4>— Emily & James</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"Professional, punctual, and the 360 booth was the highlight of our corporate gala. Highly recommend."</p><h4>— Michael R.</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"The attention to detail and custom backdrop options made our event feel truly VIP. Thank you!"</p><h4>— Sophia L.</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
+      <div class="testimonial-card">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <i class="fas fa-quote-left text-accent" style="font-size:1.5rem;"></i>
+            <div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div>
+          </div>
+          <p class="testimonial-quote">"SnapJoy made our wedding reception unforgettable! The interactive mirror booth was the absolute hit of the night. Every guest got a gorgeous print to take home!"</p>
+        </div>
+        <div class="testimonial-author-wrap">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=120&auto=format&fit=crop" alt="Emily & James" class="testimonial-avatar">
+          <div class="testimonial-meta">
+            <h4>Emily & James Sterling</h4>
+            <span>Beverly Hills Wedding · Mirror Booth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <i class="fas fa-quote-left text-accent" style="font-size:1.5rem;"></i>
+            <div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div>
+          </div>
+          <p class="testimonial-quote">"Professional, punctual, and the 360 video booth was the centerpiece of our annual tech gala. The branded overlay and instant QR sharing drove massive social buzz."</p>
+        </div>
+        <div class="testimonial-author-wrap">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop" alt="Michael R." class="testimonial-avatar">
+          <div class="testimonial-meta">
+            <h4>Michael Rodriguez</h4>
+            <span>VP of Events, Nexus Media Gala</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <i class="fas fa-quote-left text-accent" style="font-size:1.5rem;"></i>
+            <div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div>
+          </div>
+          <p class="testimonial-quote">"The attention to detail, gorgeous sequin backdrop, and high-energy attendants made our celebration feel truly VIP. Booking with SnapJoy was the easiest choice we made!"</p>
+        </div>
+        <div class="testimonial-author-wrap">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" alt="Sophia L." class="testimonial-avatar">
+          <div class="testimonial-meta">
+            <h4>Sophia Lorenzi</h4>
+            <span>30th Birthday Gala · Open-Air Glam</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: HOW IT WORKS (HD Image) -->
+<!-- SECTION 5: HOW IT WORKS (With Process Images) -->
 <section style="background: var(--bg-secondary);">
   <div class="container">
     <h2 class="section-title">How <span class="text-accent">It Works</span></h2>
     <div class="accent-divider"></div>
+    <p class="section-sub">Four effortless steps to delivering memories your guests will treasure forever.</p>
     <div class="steps-grid">
-      <div class="step-item"><i class="fas fa-calendar-alt" style="font-size:2rem; color:var(--accent);"></i><h3>1. Book Online</h3><p>Choose your booth & date</p></div>
-      <div class="step-item"><i class="fas fa-truck" style="font-size:2rem; color:var(--accent);"></i><h3>2. We Deliver</h3><p>On-time setup at venue</p></div>
-      <div class="step-item"><i class="fas fa-magic" style="font-size:2rem; color:var(--accent);"></i><h3>3. Guests Enjoy</h3><p>Unlimited photos & fun</p></div>
-      <div class="step-item"><i class="fas fa-share-alt" style="font-size:2rem; color:var(--accent);"></i><h3>4. Share Instantly</h3><p>Digital gallery & prints</p></div>
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=500&auto=format&fit=crop" alt="Step 1 Book Online">
+          <div class="step-number-badge">1</div>
+        </div>
+        <div class="step-card-body">
+          <h3>1. Book Online</h3>
+          <p>Pick your ideal booth, event date, and custom package in under 2 minutes.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500&auto=format&fit=crop" alt="Step 2 We Deliver">
+          <div class="step-number-badge">2</div>
+        </div>
+        <div class="step-card-body">
+          <h3>2. We Deliver</h3>
+          <p>Our team arrives 90 minutes early for full setup and equipment calibration.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&auto=format&fit=crop" alt="Step 3 Guests Enjoy">
+          <div class="step-number-badge">3</div>
+        </div>
+        <div class="step-card-body">
+          <h3>3. Guests Enjoy</h3>
+          <p>Unlimited snaps, fun props, and interactive studio prompts for everyone.</p>
+        </div>
+      </div>
+
+      <div class="step-img-card">
+        <div class="step-img-wrap">
+          <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=500&auto=format&fit=crop" alt="Step 4 Share Instantly">
+          <div class="step-number-badge">4</div>
+        </div>
+        <div class="step-card-body">
+          <h3>4. Share Instantly</h3>
+          <p>Guests walk away with prints and text/QR downloads, plus full 48-hour online gallery.</p>
+        </div>
+      </div>
     </div>
-    
   </div>
 </section>
 
@@ -826,7 +1418,32 @@
       <div class="faq-item"><button class="faq-question">Do you provide props and backdrops? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">Yes! We include a wide selection of premium props and can customize backdrops to match your event theme or brand colors.</div></div>
       <div class="faq-item"><button class="faq-question">What areas do you serve? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">We serve the greater metro area and surrounding regions. Contact us for specific location availability.</div></div>
     </div>
-    <div class="cta-banner"><h3 class="font-heading" style="font-size:2rem;">Ready to Elevate Your Event? <span class="text-accent">Book Now</span></h3><p style="margin:1rem 0; color: var(--text-secondary);">Get a custom quote within 24 hours. Let's make your celebration unforgettable.</p><a href="#" class="btn-primary"><i class="fas fa-phone"></i> (888) 555-SNAP</a></div>
+    <div class="cta-visual-card">
+      <div>
+        <span class="hero-tag" style="margin-bottom:0.8rem;"><i class="fas fa-sparkles"></i> Let's Celebrate</span>
+        <h3 class="font-heading" style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); line-height: 1.2; margin-bottom: 0.8rem;">
+          Ready to Elevate Your Event? <span class="text-accent">Book SnapJoy Today</span>
+        </h3>
+        <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.98rem;">
+          Get a transparent, all-inclusive quote within 24 hours. From luxury photo booths to bespoke overlays and instant prints, we create unforgettable guest experiences.
+        </p>
+        <div class="cta-trust-tags">
+          <span class="cta-tag-item"><i class="fas fa-check-circle"></i> 100% Satisfaction Guarantee</span>
+          <span class="cta-tag-item"><i class="fas fa-shield-alt"></i> $2M General Liability COI</span>
+          <span class="cta-tag-item"><i class="fas fa-clock"></i> 90-Min Early Setup</span>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Check Availability</a>
+          <a href="tel:+18885557627" class="btn-outline"><i class="fas fa-phone"></i> (888) 555-SNAP</a>
+        </div>
+      </div>
+      <div class="cta-visual-img-wrap">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop" alt="Luxury photo booth celebration">
+        <div class="cta-floating-badge">
+          <i class="fas fa-star" style="color:var(--accent);"></i> 4.9 Rating (500+ Events)
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
